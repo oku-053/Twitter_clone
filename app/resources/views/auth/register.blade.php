@@ -40,12 +40,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('user ID') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('userID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="user ID" type="text" class="form-control @error('user ID') is-invalid @enderror" name="user ID" value="{{ old('user Id') }}" required autocomplete="user ID" autofocus>
+                                <input id="userID" type="text" class="form-control @error('userID') is-invalid @enderror" name="userID" value="{{ old('userID') }}" required autocomplete="userID" autofocus>
 
-                                @error('user ID')
+                                @error('userID')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
