@@ -79,26 +79,26 @@
         <main class="py-4">
             <div class="row">
                 <div class="col-md-2">
-                    左カラム
                     <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="/home">ホーム</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Users</a>
+                        <a class="nav-link" href="/users">ユーザー一覧</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="/profile">プロフィール</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tweet</a>
+                        <a class="nav-link" href="/tweet">ツイート</a>
                     </li>
                     </ul>
                 </div>
-                <div class="col-md-4">中央カラム</div>
-                <div class="col-md-6">
-                    右カラム
+                <div class="col-md-8">
                     @yield('content')
+                </div>
+                <div class="col-md-2">
+                    右カラム
                 </div>
         </main>
     </div>
