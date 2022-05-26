@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'userID',
+        'profile_image',
         'password',
     ];
 
@@ -47,5 +48,17 @@ class User extends Authenticatable
     public function getAllUsers(Int $user_id)
     {
         return $this->Where('id', '<>', $user_id)->paginate(5);
+    }
+
+    //フォロワー
+    public function followers()
+    {
+        return $this->belongsToMany(self::class, 'followers', 'followed_id', 'following_id');
+    }
+
+    //フォロー
+    public function follows()
+    {
+        return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
     }
 }
