@@ -33,4 +33,14 @@ class Tweet extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function getUserTimeLine(string $userID)
+    {
+        return $this->where('userID', $userID)->orderBy('created_at', 'DESC')->paginate(50);
+    }
+
+    public function getTweetCount(string $userID)
+    {
+        return $this->where('userID', $userID)->count();
+    }    
 }

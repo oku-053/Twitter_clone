@@ -45,43 +45,45 @@ class User extends Authenticatable
     ];
 
     //ユーザー一覧表示
-    public function getAllUsers(Int $user_id)
+    public function getAllUsers(string $userID)
     {
-        return $this->Where('id', '<>', $user_id)->paginate(5);
+        return $this->Where('userID', '<>', $userID)->paginate(5);
     }
 
     //フォロワー
     public function followers()
     {
-        return $this->belongsToMany(self::class, 'followers', 'followed_id', 'following_id');
+        return $this->belongsToMany(self::class, 'followers', 'followed_userID', 'following_userID');
+    }
+
+  
+    public function follows()
+    {
+        return $this->belongsToMany(self::class, 'followers', 'following_userID', 'followed_userID');
+
     }
 
     //フォロー
-    public function follows()
+    public function follow(string $userID) 
     {
-        return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
-    }
-
-    public function follow(Int $user_id) 
-    {
-        return $this->follows()->attach($user_id);
+        return $this->follows()->attach($userID);
     }
 
     // フォロー解除する
-    public function unfollow(Int $user_id)
+    public function unfollow(string $userID)
     {
-        return $this->follows()->detach($user_id);
+        return $this->follows()->detach($userID);
     }
 
-    // フォローしているか
-    public function isFollowing(Int $user_id) 
+    // フォローしているか判定
+    public function isFollowing(string $userID) 
     {
-        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['id']);
+        return (boolean) $this->follows()->where('followed_userID', $userID)->first(['followed_userID']);
     }
 
-    // フォローされているか
-    public function isFollowed(Int $user_id) 
+    // フォローされているか判定
+    public function isFollowed(string $userID) 
     {
-        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
+        return (boolean) $this->followers()->where('following_userID', $userID)->first(['following_userID']);
     }    
 }

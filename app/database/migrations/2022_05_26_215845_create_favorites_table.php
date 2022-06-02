@@ -14,27 +14,27 @@ return new class extends Migration
     public function up()
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id')->comment('ユーザID');
+            $table->increments('favo_id');
+            $table->string('userID')->comment('ユーザID');
             $table->unsignedInteger('tweet_id')->comment('ツイートID');
 
-            $table->index('id');
-            $table->index('user_id');
+            $table->index('favo_id');
+            $table->index('userID');
             $table->index('tweet_id');
 
             $table->unique([
-                'user_id',
+                'userID',
                 'tweet_id'
             ]);
 
-            $table->foreign('user_id')
-                ->references('id')
+            $table->foreign('userID')
+                ->references('userID')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             $table->foreign('tweet_id')
-                ->references('id')
+                ->references('tweet_id')
                 ->on('tweets')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
