@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'userId',
+        'user_id',
         'name',
         'email',
         //'userID',
@@ -45,7 +45,7 @@ class User extends Authenticatable
     ];
 
     // 主キーカラム名を指定
-    protected $primaryKey = 'userId';
+    protected $primaryKey = 'user_id';
     // オートインクリメント無効化
     public $incrementing = false;
     // 主キーの型指名
