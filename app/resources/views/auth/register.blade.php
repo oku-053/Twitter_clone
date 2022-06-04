@@ -43,7 +43,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('userID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="userID" type="text" class="form-control @error('userID') is-invalid @enderror" name="userID" value="{{ old('userID') }}" required autocomplete="userID" autofocus>
+                                <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" required autocomplete="user_id" autofocus>
 
                                 @error('userID')
                                     <span class="invalid-feedback" role="alert">

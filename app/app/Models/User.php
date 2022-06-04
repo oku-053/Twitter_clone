@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'name',
         'email',
-        'userID',
         'profile_image',
         'password',
     ];
@@ -86,4 +86,12 @@ class User extends Authenticatable
     {
         return (boolean) $this->followers()->where('following_userID', $userID)->first(['following_userID']);
     }    
+
+    // 主キーカラム名を指定
+    protected $primaryKey = 'user_id';
+    // オートインクリメント無効化
+    public $incrementing = false;
+    // 主キーの型指名
+    protected $keyType = 'string';
+
 }
