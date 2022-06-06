@@ -14,7 +14,7 @@ class UsersController extends Controller
     //ユーザ一覧表示
     public function index(User $user)
     {
-        $all_users = $user->getAllUsers(auth()->user()->userID);
+        $all_users = $user->getAllUsers(auth()->user()->user_id);
 
         return view('users.index', [
             'all_users'  => $all_users
@@ -26,10 +26,10 @@ class UsersController extends Controller
     {
         $follower = auth()->user();
         // フォローしているか
-        $is_following = $follower->isFollowing($user->userID);
+        $is_following = $follower->isFollowing($user->user_id);
         if(!$is_following) {
             // フォローしていなければフォローする
-            $follower->follow($user->userID);
+            $follower->follow($user->user_id);
             return back();
         }
     }
@@ -39,22 +39,22 @@ class UsersController extends Controller
     {
         $follower = auth()->user();
         // フォローしているか
-        $is_following = $follower->isFollowing($user->userID);
+        $is_following = $follower->isFollowing($user->user_id);
         if($is_following) {
             // フォローしていればフォローを解除する
-            $follower->unfollow($user->userID);
+            $follower->unfollow($user->user_id);
             return back();
         }
     } 
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
         $login_user = auth()->user();
-        $is_following = $login_user->isFollowing($user->userID);
-        $is_followed = $login_user->isFollowed($user->userID);
-        $timelines = $tweet->getUserTimeLine($user->userID);
-        $tweet_count = $tweet->getTweetCount($user->userID);
-        $follow_count = $follower->getFollowCount($user->userID);
-        $follower_count = $follower->getFollowerCount($user->userID);
+        $is_following = $login_user->isFollowing($user->user_id);
+        $is_followed = $login_user->isFollowed($user->user_id);
+        $timelines = $tweet->getUserTimeLine($user->user_id);
+        $tweet_count = $tweet->getTweetCount($user->user_id);
+        $follow_count = $follower->getFollowCount($user->user_id);
+        $follower_count = $follower->getFollowerCount($user->user_id);
 
         return view('users.show', [
             'user'           => $user,

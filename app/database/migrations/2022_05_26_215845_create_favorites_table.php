@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::create('favorites', function (Blueprint $table) {
             $table->increments('favo_id');
-            $table->string('userID')->comment('ユーザID');
+            $table->string('user_id')->comment('ユーザーID');
             $table->unsignedInteger('tweet_id')->comment('ツイートID');
 
             $table->index('favo_id');
-            $table->index('userID');
+            $table->index('user_id');
             $table->index('tweet_id');
 
             $table->unique([
-                'userID',
+                'user_id',
                 'tweet_id'
             ]);
 
-            $table->foreign('userID')
-                ->references('userID')
+            $table->foreign('user_id')
+                ->references('user_id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

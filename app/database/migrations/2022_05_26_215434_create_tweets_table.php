@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('tweets', function (Blueprint $table) {
             $table->increments('tweet_id');
-            $table->string('userID')->comment('ユーザID');
+            $table->string('user_id')->comment('ユーザーID');
             $table->string('text')->comment('本文');
             $table->softDeletes();
             $table->timestamps();
 
             $table->index('tweet_id');
-            $table->index('userID');
+            $table->index('user_id');
             $table->index('text');
 
             //usersテーブルと接続
-            $table->foreign('userID')
-                ->references('userID')
+            $table->foreign('user_id')
+                ->references('user_id')
                 ->on('users');
         });
     }

@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('comment_id');
-            $table->string('userID')->comment('ユーザID');
+            $table->string('user_id')->comment('ユーザーID');
             $table->unsignedInteger('tweet_id')->comment('ツイートID');
             $table->string('text')->comment('本文');
             $table->softDeletes();
             $table->timestamps();
 
             $table->index('comment_id');
-            $table->index('userID');
+            $table->index('user_id');
             $table->index('tweet_id');
 
-            $table->foreign('userID')
-                ->references('userID')
+            $table->foreign('user_id')
+                ->references('user_id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

@@ -24,18 +24,6 @@ services:
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_PASSWORD: rootpw
 
-  db-test:
-    platform: linux/amd64
-    image: mysql:5.7
-    volumes:
-      - ./mysql:/var/lib/mysql #データの永続化
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_DATABASE: database
-      MYSQL_USER: user
-      MYSQL_PASSWORD: pass
-      MYSQL_ROOT_PASSWORD: rootpw
 
 
 

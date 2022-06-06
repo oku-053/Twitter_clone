@@ -17,8 +17,8 @@ class FollowersTableSeeder extends Seeder
     {
         for ($i = 2; $i <= 10; $i++) {
             Follower::create([
-                'following_userID' => $i,
-                'followed_userID' => 1
+                'following_user_id' => $i,
+                'followed_user_id' => 1
             ]);
         }
     }

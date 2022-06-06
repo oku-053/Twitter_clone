@@ -17,7 +17,7 @@ class FavoritesTableSeeder extends Seeder
     {
         for ($i = 2; $i <= 10; $i++) {
             Favorite::create([
-                'userID' => 1,
+                'user_id' => 1,
                 'tweet_id' => $i
             ]);
         }

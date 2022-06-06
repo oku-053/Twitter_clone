@@ -10,24 +10,24 @@
                         <img src="{{ $user->profile_image }}" class="rounded-circle" width="100" height="100">
                         <div class="mt-3 d-flex flex-column">
                             <h4 class="mb-0 font-weight-bold">{{ $user->name }}</h4>
-                            <span class="text-secondary">{{ $user->userID }}</span>
+                            <span class="text-secondary">{{ $user->user_id }}</span>
                         </div>
                     </div>
                     <div class="p-3 d-flex flex-column justify-content-between">
                         <div class="d-flex">
                             <div>
-                                @if ($user->useID === Auth::user()->userID)
-                                    <a href="{{ url('users/' .$user->userID .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
+                                @if ($user->use_id === Auth::user()->user_id)
+                                    <a href="{{ url('users/' .$user->user_id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
                                 @else
                                     @if ($is_following)
-                                        <form action="{{ route('unfollow', ['userID' => $user->userID]) }}" method="POST">
+                                        <form action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
                                             <button type="submit" class="btn btn-danger">フォロー解除</button>
                                         </form>
                                     @else
-                                        <form action="{{ route('follow', ['userID' => $user->userID]) }}" method="POST">
+                                        <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
                                             {{ csrf_field() }}
 
                                             <button type="submit" class="btn btn-primary">フォローする</button>
@@ -66,7 +66,7 @@
                             <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
                             <div class="ml-2 d-flex flex-column flex-grow-1">
                                 <p class="mb-0">{{ $timeline->user->name }}</p>
-                                <a href="{{ url('users/' .$timeline->user->userID) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
+                                <a href="{{ url('users/' .$timeline->user->user_id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
                             </div>
                             <div class="d-flex justify-content-end flex-grow-1">
                                 <p class="mb-0 text-secondary">{{ $timeline->created_at->format('Y-m-d H:i') }}</p>
@@ -76,7 +76,7 @@
                             {{ $timeline->text }}
                         </div>
                         <div class="card-footer py-1 d-flex justify-content-end bg-white">
-                            @if ($timeline->user->userID === Auth::user()->userID)
+                            @if ($timeline->user->user_id === Auth::user()->user_id)
                                 <div class="dropdown mr-3 d-flex align-items-center">
                                     <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v fa-fw"></i>
