@@ -13,11 +13,13 @@
                             <span class="text-secondary">{{ $user->user_id }}</span>
                         </div>
                     </div>
-                    {{-- <div class="p-3 d-flex flex-column justify-content-between">
+                    <div class="p-3 d-flex flex-column justify-content-between">
                         <div class="d-flex">
                             <div>
-                                @if ($user->use_id === Auth::user()->user_id)
+                                @if ($user->user_id === Auth::user()->user_id)
                                     <a href="{{ url('users/' .$user->user_id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
+                                {{-- @else
+                                    <span class="text-secondary">他人のアカウントですよ</span> --}}
                                 @else
                                     @if ($is_following)
                                         <form action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST">
@@ -37,7 +39,7 @@
                                     @if ($is_followed)
                                         <span class="mt-2 px-1 bg-secondary text-light">フォローされています</span>
                                     @endif
-                                @endif
+                                @endif 
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -54,7 +56,7 @@
                                 <span>{{ $follower_count }}</span>
                             </div>
                         </div>
-                    </div> --}}
+                    </div> 
                 </div>
             </div>
         </div>
