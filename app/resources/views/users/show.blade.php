@@ -13,7 +13,7 @@
                             <span class="text-secondary">{{ $user->user_id }}</span>
                         </div>
                     </div>
-                    <div class="p-3 d-flex flex-column justify-content-between">
+                    {{-- <div class="p-3 d-flex flex-column justify-content-between">
                         <div class="d-flex">
                             <div>
                                 @if ($user->use_id === Auth::user()->user_id)
@@ -54,7 +54,7 @@
                                 <span>{{ $follower_count }}</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

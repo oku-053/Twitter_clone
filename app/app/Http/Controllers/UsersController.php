@@ -23,7 +23,7 @@ class UsersController extends Controller
 
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
-        $login_user = auth()->user()->user_id;//ログインしている自分自身
+        $login_user = auth()->user();//ログインしている自分自身
         $timelines = $tweet->getUserTimeLine($user->user_id);
         $is_following = $login_user->isFollowing($user->user_id);
         $is_followed = $login_user->isFollowed($user->user_id);
