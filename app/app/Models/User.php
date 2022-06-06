@@ -78,7 +78,7 @@ class User extends Authenticatable
     // フォローしているか判定
     public function isFollowing(string $user_id) 
     {
-        return (boolean) $this->follows()->where('followed_user_id', $user_id)->first(['followed_user_id']);
+        return (boolean) $this->follows()->where('followed_user_id',$user_id)->first(['followed_user_id']);
     }
 
     // フォローされているか判定

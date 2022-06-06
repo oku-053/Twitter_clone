@@ -17,7 +17,7 @@ class TweetsTableSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             Tweet::create([
-                'userID'    => $i,
+                'user_id'    => 'test_user'+$i,
                 'text'       => 'テスト投稿' .$i,
                 'created_at' => now(),
                 'updated_at' => now()
