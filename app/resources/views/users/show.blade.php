@@ -22,14 +22,14 @@
                                     <span class="text-secondary">他人のアカウントですよ</span> --}}
                                 @else
                                     @if ($is_following)
-                                        <form action="{{ route('unfollow', ['user_id' => $user->user_id]) }}" method="POST">
+                                        <form action="{{ route('unfollow', ['user' => $user->user_id]) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
                                             <button type="submit" class="btn btn-danger">フォロー解除</button>
                                         </form>
                                     @else
-                                        <form action="{{ route('follow', ['user_id' => $user->user_id]) }}" method="POST">
+                                        <form action="{{ route('follow', ['user' => $user->user_id]) }}" method="POST">
                                             {{ csrf_field() }}
 
                                             <button type="submit" class="btn btn-primary">フォローする</button>
