@@ -78,13 +78,13 @@ class User extends Authenticatable
     // フォローしているか判定
     public function isFollowing(string $user_id) 
     {
-        return (boolean) $this->follows()->where('followed_user_id',$user_id)->first(['user_id']);
+        return (boolean) $this->follows()->where('followed_user_id', $user_id)->first(['followed_user_id']);
     }
 
     // フォローされているか判定
     public function isFollowed(string $user_id) 
     {
-        return (boolean) $this->followers()->where('following_user_id', $user_id)->first(['user_id']);
+        return (boolean) $this->followers()->where('following_user_id', $user_id)->first(['following_user_id']);
     }    
 
     // 主キーカラム名を指定
