@@ -91,7 +91,7 @@
                         <a class="nav-link" href="/users">ユーザー一覧</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile">プロフィール</a>
+                        <a class="nav-link" href="{{ url('users/' .auth()->user()->user_id) }}">プロフィール</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/tweet">ツイート</a>

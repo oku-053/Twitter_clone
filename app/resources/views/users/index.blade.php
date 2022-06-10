@@ -11,7 +11,7 @@
                             <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
                             <div class="ml-2 d-flex flex-column">
                                 <p class="mb-0">{{ $user->name }}</p>
-                                <a href="{{ url('users/' .$user->use_id) }}" class="text-secondary">{{ $user->user_id }}</a>
+                                <a href="{{ url('users/' .$user->user_id) }}" class="text-secondary">{{ $user->user_id }}</a>
                             </div>
                             @if (auth()->user()->isFollowed($user->user_id))
                                 <div class="px-2">
