@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'name',
         'email',
         'password',
@@ -41,4 +42,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // 主キーカラム名を指定
+    protected $primaryKey = 'user_id';
+    // オートインクリメント無効化
+    public $incrementing = false;
+    // 主キーの型指名
+    protected $keyType = 'string';
 }
