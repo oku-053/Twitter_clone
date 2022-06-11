@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('followers', function (Blueprint $table) {
-            $table->unsignedInteger('following_id')->comment('フォローしているユーザID');
-            $table->unsignedInteger('followed_id')->comment('フォローされているユーザID');
+            $table->string('following_user_id')->comment('フォローしているユーザーID');
+            $table->string('followed_user_id')->comment('フォローされているユーザーID');
 
-            $table->index('following_id');
-            $table->index('followed_id');
+            $table->index('following_user_id');
+            $table->index('followed_user_id');
 
             $table->unique([
-                'following_id',
-                'followed_id'
+                'following_user_id',
+                'followed_user_id'
             ]);
         });
     }

@@ -29,7 +29,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+//ログインしているユーザー限定のルート
 Route::group(['middleware' => 'auth'], function() {
 
     // ユーザ関連
@@ -39,5 +39,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('users/{user}/follow', 'App\Http\Controllers\UsersController@follow')->name('follow');
     //フォロー解除する
     Route::delete('users/{user}/unfollow', 'App\Http\Controllers\UsersController@unfollow')->name('unfollow');
+
+
 
 });

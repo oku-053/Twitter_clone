@@ -14,25 +14,25 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id')->comment('ユーザID');
+            $table->increments('comment_id');
+            $table->string('user_id')->comment('ユーザーID');
             $table->unsignedInteger('tweet_id')->comment('ツイートID');
             $table->string('text')->comment('本文');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index('id');
+            $table->index('comment_id');
             $table->index('user_id');
             $table->index('tweet_id');
 
             $table->foreign('user_id')
-                ->references('id')
+                ->references('user_id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             $table->foreign('tweet_id')
-                ->references('id')
+                ->references('tweet_id')
                 ->on('tweets')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

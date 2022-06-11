@@ -14,36 +14,37 @@ class UsersController extends Controller
     //ユーザ一覧表示
     public function index(User $user)
     {
-        $all_users = $user->getAllUsers(auth()->user()->id);
+        $all_users = $user->getAllUsers(auth()->user()->user_id);
 
         return view('users.index', [
             'all_users'  => $all_users
         ]);
     }
 
-     // フォロー
-     public function follow(User $user)
-     {
-         $follower = auth()->user();
-         // フォローしているか
-         $is_following = $follower->isFollowing($user->id);
-         if(!$is_following) {
-             // フォローしていなければフォローする
-             $follower->follow($user->id);
-             return back();
-         }
-     }
+    // フォロー
+    public function follow(User $user)
+    {
+        $follower = auth()->user();
+        // フォローしているか
+        $is_following = $follower->isFollowing($user->user_id);
+        if(!$is_following) {
+            // フォローしていなければフォローする
+            $follower->follow($user->user_id);
+            return back();
+        }
+    }
  
      // フォロー解除
-     public function unfollow(User $user)
-     {
-         $follower = auth()->user();
-         // フォローしているか
-         $is_following = $follower->isFollowing($user->id);
-         if($is_following) {
-             // フォローしていればフォローを解除する
-             $follower->unfollow($user->id);
-             return back();
-         }
-     }   
+    public function unfollow(User $user)
+    {
+        $follower = auth()->user();
+        // フォローしているか
+        $is_following = $follower->isFollowing($user->user_id);
+        if($is_following) {
+            // フォローしていればフォローを解除する
+            $follower->unfollow($user->user_id);
+            return back();
+        }
+    } 
+
 }
