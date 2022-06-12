@@ -65,19 +65,19 @@
                 <div class="col-md-8 mb-3">
                     <div class="card">
                         <div class="card-haeder p-3 w-100 d-flex">
-                            <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
-                            <div class="ml-2 d-flex flex-column flex-grow-1">
+                            <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                            {{-- <div class="ml-2 d-flex flex-column flex-grow-1">
                                 <p class="mb-0">{{ $timeline->user->name }}</p>
-                                <a href="{{ url('users/' .$timeline->user->user_id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
-                            </div>
+                                <a href="{{ url('users/' .$timeline->user->user_id) }}" class="text-secondary">{{ $timeline->user->user_id }}</a>
+                            </div> --}}
                             <div class="d-flex justify-content-end flex-grow-1">
                                 <p class="mb-0 text-secondary">{{ $timeline->created_at->format('Y-m-d H:i') }}</p>
                             </div>
-                        </div>
+                        </div> 
                         <div class="card-body">
                             {{ $timeline->text }}
                         </div>
-                        <div class="card-footer py-1 d-flex justify-content-end bg-white">
+                        {{-- <div class="card-footer py-1 d-flex justify-content-end bg-white">
                             @if ($timeline->user->user_id === Auth::user()->user_id)
                                 <div class="dropdown mr-3 d-flex align-items-center">
                                     <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -93,16 +93,8 @@
                                         </form>
                                     </div>
                                 </div>
-                            @endif
-                            <div class="mr-3 d-flex align-items-center">
-                                <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
-                            </div>
-                        </div>
+                            @endif --}}
+                        </div> 
                     </div>
                 </div>
             @endforeach
