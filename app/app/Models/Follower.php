@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Follower extends Model
 {
     protected $primaryKey = [
-        'following_id',
-        'followed_id'
+        'following_user_id',
+        'followed_user_id'
     ];
     protected $fillable = [
-        'following_id',
-        'followed_id'
+        'following_user_id',
+        'followed_user_id'
     ];
     public $timestamps = false;
     public $incrementing = false;
+
+
 }
