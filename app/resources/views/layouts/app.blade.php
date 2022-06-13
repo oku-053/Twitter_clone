@@ -98,12 +98,10 @@
                     </li>
                     </ul>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-10">
                     @yield('content')
                 </div>
-                <div class="col-md-2">
-                    右カラム
-                </div>
+
         </main>
     </div>
 </body>

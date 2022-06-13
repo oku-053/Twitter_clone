@@ -87,6 +87,29 @@ class User extends Authenticatable
         return (boolean) $this->followers()->where('following_user_id', $user_id)->first(['following_user_id']);
     }    
 
+    //プロフィール編集,更新
+    public function updateProfile(Array $params)
+    {
+        if (isset($params['profile_image'])) {//プロフィール画像に変更があった場合
+            $file_name = $params['profile_image']->store('public/profile_image/');
+
+            $this::where('user_id', $this->user_id)
+                ->update([
+                    'name'          => $params['name'],
+                    'profile_image' => basename($file_name),
+                    'email'         => $params['email'],
+                ]);
+        } else {//プロフィール画像に変更が無かった場合
+            $this::where('user_id', $this->user_id)
+                ->update([
+                    'name'          => $params['name'],
+                    'email'         => $params['email'],
+                ]); 
+        }
+
+        return;
+    }
+
     // 主キーカラム名を指定
     protected $primaryKey = 'user_id';
     // オートインクリメント無効化

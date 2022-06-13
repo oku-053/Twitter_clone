@@ -70,4 +70,27 @@ class UsersController extends Controller
         }
     } 
 
+    //プロフィール編集
+    public function edit(User $user)
+    {
+        return view('users.edit',[
+            'user' => $user
+        ]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'name'          => ['required', 'string', 'max:255'],
+            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'email'         =>['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->email)]
+            //Rule~で自分のIDの時だけユニーク設定を無効にできるらしい
+        ]);
+        $validator->validate();
+        $user->updateProfile($data);
+
+        return redirect('users/'.$user->user_id);
+    }
+
 }
