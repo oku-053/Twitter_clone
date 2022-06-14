@@ -82,16 +82,16 @@
                 <div class="col-md-2">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="/home">ホーム</a>
+                            <a class="nav-link" href="/home">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/users">ユーザー一覧</a>
+                            <a class="nav-link" href="/users">{{ __('Users') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/profile">プロフィール</a>
+                            <a class="nav-link" href="/profile">{{ __('Profile') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/tweet">ツイート</a>
+                            <a class="nav-link" href="/tweet">{{ __('Tweet') }}</a>
                         </li>
                     </ul>
                 </div>
