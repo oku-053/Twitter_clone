@@ -33,5 +33,9 @@
     "Tweet":"ツイート",
 
     "Dashboard":"ダッシュボード",
-    "You are logged in!":"ログインしました！"
+    "You are logged in!":"ログインしました！",
+
+    "Follow":"フォロー",
+    "un_Follow":"フォロー解除",
+    "Followed":"フォローされています"
 } 
