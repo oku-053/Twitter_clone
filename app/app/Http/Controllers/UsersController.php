@@ -25,26 +25,21 @@ class UsersController extends Controller
     public function follow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
-        if(!$is_following) {
-            // フォローしていなければフォローする
+        if (!$is_following) {
             $follower->follow($user->user_id);
             return back();
         }
     }
- 
-     // フォロー解除
+
+    // フォロー解除
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
-        if($is_following) {
-            // フォローしていればフォローを解除する
+        if ($is_following) {
             $follower->unfollow($user->user_id);
             return back();
         }
-    } 
-
+    }
 }

@@ -36,11 +36,11 @@ class Tweet extends Model
 
     public function getUserTimeLine(string $user_id)
     {
-        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
+        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
 
     public function getTweetCount(string $user_id)
     {
         return $this->where('user_id', $user_id)->count();
-    }    
+    }
 }
