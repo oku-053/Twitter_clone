@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('user_id',20)->primary()->unique()->nullable(false)->comment('ユーザーID');
+            $table->string('user_id', 20)->primary()->unique()->nullable(false)->comment('ユーザーID');
             $table->string('name')->comment('ユーザ-名');
+            $table->string('profile_image')->nullable()->default('50x50.jpg')->comment('プロフィール画像');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
