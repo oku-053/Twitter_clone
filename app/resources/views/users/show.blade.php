@@ -77,15 +77,6 @@
                     {{ $timeline->text }}
                 </div>
             </div>
-            @endif
-            <div class="mr-3 d-flex align-items-center">
-                <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
-            </div>
-            <div class="d-flex align-items-center">
-                <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
-            </div>
         </div>
     </div>
 </div>
