@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -47,7 +48,7 @@ class User extends Authenticatable
     //ユーザー一覧表示
     public function getAllUsers(string $user_id)
     {
-        return $this->Where('user_id', '<>', $user_id)->paginate(5);
+        return $this->Where('user_id', '<>', $user_id)->paginate(config('const.paginate.user'));
     }
 
     //フォロワー
@@ -56,15 +57,14 @@ class User extends Authenticatable
         return $this->belongsToMany(self::class, 'followers', 'followed_user_id', 'following_user_id');
     }
 
-  
+
     public function follows()
     {
         return $this->belongsToMany(self::class, 'followers', 'following_user_id', 'followed_user_id');
-
     }
 
     //フォロー
-    public function follow(string $user_id) 
+    public function follow(string $user_id)
     {
         return $this->follows()->attach($user_id);
     }
@@ -76,16 +76,16 @@ class User extends Authenticatable
     }
 
     // フォローしているか判定
-    public function isFollowing(string $user_id) 
+    public function isFollowing(string $user_id)
     {
-        return (boolean) $this->follows()->where('followed_user_id', $user_id)->first(['followed_user_id']);
+        return (bool) $this->follows()->where('followed_user_id', $user_id)->first(['followed_user_id']);
     }
 
     // フォローされているか判定
-    public function isFollowed(string $user_id) 
+    public function isFollowed(string $user_id)
     {
-        return (boolean) $this->followers()->where('following_user_id', $user_id)->first(['following_user_id']);
-    }    
+        return (bool) $this->followers()->where('following_user_id', $user_id)->first(['following_user_id']);
+    }
 
     //プロフィール編集,更新
     public function updateProfile(Array $params)
@@ -116,5 +116,4 @@ class User extends Authenticatable
     public $incrementing = false;
     // 主キーの型指名
     protected $keyType = 'string';
-
 }
