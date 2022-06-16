@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
 
-
 class Tweet extends Model
 {
     use SoftDeletes;
@@ -20,7 +19,6 @@ class Tweet extends Model
         'text'
     ];
 
-    //リレーション
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -36,13 +34,12 @@ class Tweet extends Model
         return $this->hasMany(Comment::class);
     }
 
-    // ユーザのタイムラインを取得する
     public function getUserTimeLine(string $user_id)
     {
         return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
 
-    public function getTweetCount($user_id)
+    public function getTweetCount(string $user_id)
     {
         return $this->where('user_id', $user_id)->count();
     }
