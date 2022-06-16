@@ -21,25 +21,53 @@ class UsersController extends Controller
         ]);
     }
 
+    public function show(User $user, Tweet $tweet, Follower $follower)
+    {
+        $login_user = auth()->user();//ログインしている自分自身
+        $timelines = $tweet->getUserTimeLine($user->user_id);
+        $is_following = $login_user->isFollowing($user->user_id);
+        $is_followed = $login_user->isFollowed($user->user_id);
+    
+        //カウント関連
+        $tweet_count = $tweet->getTweetCount($user->user_id);
+        $follow_count = $follower->getFollowCount($user->user_id);
+        $follower_count = $follower->getFollowerCount($user->user_id);
+
+        return view('users.show', [
+            'user'           => $user,
+            'is_following'   => $is_following,
+            'is_followed'    => $is_followed,
+            'timelines'      => $timelines,
+            'tweet_count'    => $tweet_count,
+            'follow_count'   => $follow_count,
+            'follower_count' => $follower_count
+        ]);
+    }  
+
     // フォロー
     public function follow(User $user)
     {
         $follower = auth()->user();
+        // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
-        if (!$is_following) {
+        if(!$is_following) {
+            // フォローしていなければフォローする
             $follower->follow($user->user_id);
             return back();
         }
     }
-
-    // フォロー解除
+ 
+     // フォロー解除
     public function unfollow(User $user)
     {
         $follower = auth()->user();
+        // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
-        if ($is_following) {
+        if($is_following) {
+            // フォローしていればフォローを解除する
             $follower->unfollow($user->user_id);
             return back();
         }
-    }
+    } 
+
 }
