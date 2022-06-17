@@ -88,23 +88,22 @@ class User extends Authenticatable
     }
 
     //プロフィール編集,更新
-    public function updateProfile(Array $params)
+    public function updateProfile(array $params)
     {
-        if (isset($params['profile_image'])) {//プロフィール画像に変更があった場合
+        if (isset($params['profile_image'])) {
             $file_name = $params['profile_image']->store('public/profile_image/');
-
             $this::where('user_id', $this->user_id)
                 ->update([
                     'name'          => $params['name'],
                     'profile_image' => basename($file_name),
                     'email'         => $params['email'],
                 ]);
-        } else {//プロフィール画像に変更が無かった場合
+        } else {
             $this::where('user_id', $this->user_id)
                 ->update([
                     'name'          => $params['name'],
                     'email'         => $params['email'],
-                ]); 
+                ]);
         }
 
         return;

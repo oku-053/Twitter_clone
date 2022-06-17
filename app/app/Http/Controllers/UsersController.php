@@ -23,11 +23,11 @@ class UsersController extends Controller
 
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
-        $login_user = auth()->user();//ログインしている自分自身
+        $login_user = auth()->user(); //ログインしている自分自身
         $timelines = $tweet->getUserTimeLine($user->user_id);
         $is_following = $login_user->isFollowing($user->user_id);
         $is_followed = $login_user->isFollowed($user->user_id);
-    
+
         //カウント関連
         $tweet_count = $tweet->getTweetCount($user->user_id);
         $follow_count = $follower->getFollowCount($user->user_id);
@@ -42,7 +42,7 @@ class UsersController extends Controller
             'follow_count'   => $follow_count,
             'follower_count' => $follower_count
         ]);
-    }  
+    }
 
     // フォロー
     public function follow(User $user)
@@ -50,30 +50,30 @@ class UsersController extends Controller
         $follower = auth()->user();
         // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
-        if(!$is_following) {
+        if (!$is_following) {
             // フォローしていなければフォローする
             $follower->follow($user->user_id);
             return back();
         }
     }
- 
-     // フォロー解除
+
+    // フォロー解除
     public function unfollow(User $user)
     {
         $follower = auth()->user();
         // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
-        if($is_following) {
+        if ($is_following) {
             // フォローしていればフォローを解除する
             $follower->unfollow($user->user_id);
             return back();
         }
-    } 
+    }
 
     //プロフィール編集
     public function edit(User $user)
     {
-        return view('users.edit',[
+        return view('users.edit', [
             'user' => $user
         ]);
     }
@@ -84,13 +84,12 @@ class UsersController extends Controller
         $validator = Validator::make($data, [
             'name'          => ['required', 'string', 'max:255'],
             'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'email'         =>['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->email)]
+            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->email)]
             //Rule~で自分のIDの時だけユニーク設定を無効にできるらしい
         ]);
         $validator->validate();
         $user->updateProfile($data);
 
-        return redirect('users/'.$user->user_id);
+        return redirect('users/' . $user->user_id);
     }
-
 }
