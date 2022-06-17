@@ -88,7 +88,7 @@
                             <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/profile">{{ __('Profile') }}</a>
+                            <a class="nav-link" href="{{ route('users.show', $user_id = Auth::user()->user_id) }}">{{ __('Profile') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/tweet">{{ __('Tweet') }}</a>
