@@ -59,9 +59,8 @@
             </div>
         </div>
         @if (isset($timelines))
-        @foreach ($timelines as $timeline)
-        {{-- <?php dd($timeline->user_id) ?> --}}
         <div class="col-md-8 mb-3">
+            @foreach ($timelines as $timeline)
             <div class="card">
                 <div class="card-haeder p-3 w-100 d-flex">
                     <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
@@ -77,11 +76,10 @@
                     {{ $timeline->text }}
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
-</div>
-@endforeach
-@endif
+    @endif
 </div>
 <div class="my-4 d-flex justify-content-center">
     {{ $timelines->links() }}
