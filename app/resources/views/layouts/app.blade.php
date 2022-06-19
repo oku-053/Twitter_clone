@@ -93,7 +93,7 @@
                                 <a class="nav-link" href="{{ route('users.show', $user_id = Auth::user()->user_id) }}">{{ __('Profile') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/tweet">{{ __('Tweet') }}</a>
+                                <a class="btn btn-md btn-primary" href="{{ route('tweets.create') }}">{{ __('Tweet') }}</a>
                             </li>
                         </ul>
                     </div>
