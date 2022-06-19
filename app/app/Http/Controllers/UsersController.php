@@ -25,22 +25,22 @@ class UsersController extends Controller
     {
         $login_user = auth()->user(); //ログインしている自分自身
         $timelines = $tweet->getUserTimeLine($user->user_id);
-        $is_following = $login_user->isFollowing($user->user_id);
-        $is_followed = $login_user->isFollowed($user->user_id);
+        $isFollowing = $login_user->isFollowing($user->user_id);
+        $isFollowed = $login_user->isFollowed($user->user_id);
 
         //カウント関連
-        $tweet_count = $tweet->getTweetCount($user->user_id);
-        $follow_count = $follower->getFollowCount($user->user_id);
-        $follower_count = $follower->getFollowerCount($user->user_id);
+        $tweetCount = $tweet->getTweetCount($user->user_id);
+        $followCount = $follower->getFollowCount($user->user_id);
+        $followerCount = $follower->getFollowerCount($user->user_id);
 
         return view('users.show', [
             'user'           => $user,
-            'is_following'   => $is_following,
-            'is_followed'    => $is_followed,
+            'isFollowing'   => $isFollowing,
+            'isFollowed'    => $isFollowed,
             'timelines'      => $timelines,
-            'tweet_count'    => $tweet_count,
-            'follow_count'   => $follow_count,
-            'follower_count' => $follower_count
+            'tweetCount'    => $tweetCount,
+            'followCount'   => $followCount,
+            'followerCount' => $followerCount
         ]);
     }
 
