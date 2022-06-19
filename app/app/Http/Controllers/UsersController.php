@@ -11,7 +11,14 @@ use App\models\Follower;
 
 class UsersController extends Controller
 {
-    //ユーザ一覧表示
+    /**
+     * ユーザーIDを全て取得し、viweに返す
+     * 
+     * @access public
+     * @param User $user
+     * @see getAllUsers
+     * @return \Illuminate\Http\Response
+     */
     public function index(User $user)
     {
         $all_users = $user->getAllUsers(auth()->user()->user_id);
@@ -21,6 +28,17 @@ class UsersController extends Controller
         ]);
     }
 
+    /**
+     * 特定のユーザーに関する情報を取得し、viewに返す
+     * 
+     * @access public
+     * @param User $user
+     * @param Tweet $tweet
+     * @param Follower $follower
+     *  
+     * @see getUserTimeLine, isFollowing, isFollowed, getTweetCount, getFollowCoun, getFollowerCount
+     * @return \Illuminate\Http\Response
+     */
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
         $login_user = auth()->user(); //ログインしている自分自身
@@ -44,7 +62,14 @@ class UsersController extends Controller
         ]);
     }
 
-    // フォロー
+    /**
+     * ユーザーのフォロー
+     * 
+     * @access public
+     * @param User $user
+     * @see sFollowing, follow
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function follow(User $user)
     {
         $follower = auth()->user();
@@ -55,7 +80,14 @@ class UsersController extends Controller
         }
     }
 
-    // フォロー解除
+    /**
+     * ユーザーのフォロー解除
+     * 
+     * @access public
+     * @param User $user
+     * @see sFollowing, unfollow
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function unfollow(User $user)
     {
         $follower = auth()->user();
