@@ -63,7 +63,7 @@
             @foreach ($timelines as $timeline)
             <div class="card">
                 <div class="card-haeder p-3 w-100 d-flex">
-                    <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
+                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
                     <div class="ml-2 d-flex flex-column flex-grow-1">
                         <p class="mb-0">{{ $user->name }}</p>
                         <a href="{{ route('users.show', $timeline->user_id) }}" class="text-secondary">{{ $timeline->user_id }}</a>

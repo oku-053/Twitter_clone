@@ -98,7 +98,14 @@ class UsersController extends Controller
         }
     }
 
-    //プロフィール編集
+    /**
+     * 入力された内容を$userに入れて返す
+     * 
+     * @access public
+     * @param User $user
+     *  
+     * @return \Illuminate\Http\Response
+     */
     public function edit(User $user)
     {
         return view('users.edit', [
@@ -106,13 +113,23 @@ class UsersController extends Controller
         ]);
     }
 
+    /**
+     * ユーザー情報更新時の内容にバリデーションをかける
+     * 
+     * @access public
+     * @param User $user
+     * @param Request $request
+     *  
+     * @see updateProfile
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, User $user)
     {
         $data = $request->all();
         $validator = Validator::make($data, [
             'name'          => ['required', 'string', 'max:255'],
             'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->email)]
+            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->user_id, 'user_id')]
             //Rule~で自分のIDの時だけユニーク設定を無効にできるらしい
         ]);
         $validator->validate();
@@ -120,3 +137,4 @@ class UsersController extends Controller
 
         return redirect('users/' . $user->user_id);
     }
+}
