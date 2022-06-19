@@ -11,7 +11,14 @@ use App\models\Follower;
 
 class UsersController extends Controller
 {
-    //ユーザ一覧表示
+    /**
+     * ユーザーIDを全て取得し、viweに返す
+     * 
+     * @access public
+     * @param User $user
+     * @see getAllUsers
+     * @return \Illuminate\Http\Response
+     */
     public function index(User $user)
     {
         $all_users = $user->getAllUsers(auth()->user()->user_id);
@@ -21,50 +28,71 @@ class UsersController extends Controller
         ]);
     }
 
+    /**
+     * 特定のユーザーに関する情報を取得し、viewに返す
+     * 
+     * @access public
+     * @param User $user
+     * @param Tweet $tweet
+     * @param Follower $follower
+     *  
+     * @see getUserTimeLine, isFollowing, isFollowed, getTweetCount, getFollowCoun, getFollowerCount
+     * @return \Illuminate\Http\Response
+     */
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
         $login_user = auth()->user(); //ログインしている自分自身
         $timelines = $tweet->getUserTimeLine($user->user_id);
-        $is_following = $login_user->isFollowing($user->user_id);
-        $is_followed = $login_user->isFollowed($user->user_id);
+        $isFollowing = $login_user->isFollowing($user->user_id);
+        $isFollowed = $login_user->isFollowed($user->user_id);
 
         //カウント関連
-        $tweet_count = $tweet->getTweetCount($user->user_id);
-        $follow_count = $follower->getFollowCount($user->user_id);
-        $follower_count = $follower->getFollowerCount($user->user_id);
+        $tweetCount = $tweet->getTweetCount($user->user_id);
+        $followCount = $follower->getFollowCount($user->user_id);
+        $followerCount = $follower->getFollowerCount($user->user_id);
 
         return view('users.show', [
             'user'           => $user,
-            'is_following'   => $is_following,
-            'is_followed'    => $is_followed,
+            'isFollowing'   => $isFollowing,
+            'isFollowed'    => $isFollowed,
             'timelines'      => $timelines,
-            'tweet_count'    => $tweet_count,
-            'follow_count'   => $follow_count,
-            'follower_count' => $follower_count
+            'tweetCount'    => $tweetCount,
+            'followCount'   => $followCount,
+            'followerCount' => $followerCount
         ]);
     }
 
-    // フォロー
+    /**
+     * ユーザーのフォロー
+     * 
+     * @access public
+     * @param User $user
+     * @see sFollowing, follow
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function follow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
         if (!$is_following) {
-            // フォローしていなければフォローする
             $follower->follow($user->user_id);
             return back();
         }
     }
 
-    // フォロー解除
+    /**
+     * ユーザーのフォロー解除
+     * 
+     * @access public
+     * @param User $user
+     * @see sFollowing, unfollow
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
         $is_following = $follower->isFollowing($user->user_id);
         if ($is_following) {
-            // フォローしていればフォローを解除する
             $follower->unfollow($user->user_id);
             return back();
         }
@@ -92,4 +120,3 @@ class UsersController extends Controller
 
         return redirect('users/' . $user->user_id);
     }
-}

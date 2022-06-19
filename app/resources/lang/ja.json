@@ -37,5 +37,12 @@
 
     "Follow":"フォロー",
     "un_Follow":"フォロー解除",
-    "Followed":"フォローされています"
+    "Followed":"フォローされています",
+
+    "Tweet_count":"ツイート数",
+    "Follow_count":"フォロー数",
+    "Follower_count":"フォロワー数",
+    "edit_profile":"プロフィールを編集"
+
+
 } 
