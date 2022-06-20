@@ -78,11 +78,10 @@
             </div>
             @endforeach
         </div>
+        @endif
     </div>
-    @endif
-</div>
-<div class="my-4 d-flex justify-content-center">
-    {{ $timelines->links() }}
-</div>
+    <div class="my-4 d-flex justify-content-center">
+        {{ $timelines->links() }}
+    </div>
 </div>
 @endsection

@@ -41,10 +41,10 @@ class UsersController extends Controller
      */
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
-        $login_user = auth()->user(); //ログインしている自分自身
+        $loginUser = auth()->user(); //ログインしている自分自身
         $timelines = $tweet->getUserTimeLine($user->user_id);
-        $isFollowing = $login_user->isFollowing($user->user_id);
-        $isFollowed = $login_user->isFollowed($user->user_id);
+        $isFollowing = $loginUser->isFollowing($user->user_id);
+        $isFollowed = $loginUser->isFollowed($user->user_id);
 
         //カウント関連
         $tweetCount = $tweet->getTweetCount($user->user_id);
@@ -73,11 +73,11 @@ class UsersController extends Controller
     public function follow(User $user)
     {
         $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->user_id);
-        if (!$is_following) {
+        $isFollowing = $follower->isFollowing($user->user_id);
+        if (!$isFollowing) {
             $follower->follow($user->user_id);
-            return back();
         }
+        return back();
     }
 
     /**
@@ -91,11 +91,11 @@ class UsersController extends Controller
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->user_id);
-        if ($is_following) {
+        $isFollowing = $follower->isFollowing($user->user_id);
+        if ($isFollowing) {
             $follower->unfollow($user->user_id);
-            return back();
         }
+        return back();
     }
 
     /**
@@ -135,6 +135,6 @@ class UsersController extends Controller
         $validator->validate();
         $user->updateProfile($data);
 
-        return redirect('users/' . $user->user_id);
+        return redirect(route('users.show', $user->user_id));
     }
 }

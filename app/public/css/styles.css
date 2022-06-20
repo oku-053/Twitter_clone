@@ -9,10 +9,10 @@
 
  /* original */
 
- .sidebar_fixed {
-    position: sticky;
-    top: 60px;
-  }
+.sidebar_fixed {
+  position: sticky;
+  top: 60px;
+}
 
  /* bootstrap */
 
