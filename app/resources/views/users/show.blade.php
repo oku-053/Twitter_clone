@@ -37,7 +37,6 @@
                                 @if ($isFollowed)
                                 <span class="mt-2 px-1 bg-secondary text-light">{{ __('Followed') }}</span>
                                 @endif
-                                @endif
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
