@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="d-inline-flex">
                     <div class="p-3 d-flex flex-column">
-                        <img src="{{ $user->profile_image }}" class="rounded-circle" width="100" height="100">
+                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="100" height="100">
                         <div class="mt-3 d-flex flex-column">
                             <h4 class="mb-0 font-weight-bold">{{ $user->name }}</h4>
                             <span class="text-secondary">{{ $user->user_id }}</span>
@@ -37,6 +37,7 @@
                                 @if ($isFollowed)
                                 <span class="mt-2 px-1 bg-secondary text-light">{{ __('Followed') }}</span>
                                 @endif
+                                @endif
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -62,7 +63,7 @@
             @foreach ($timelines as $timeline)
             <div class="card">
                 <div class="card-haeder p-3 w-100 d-flex">
-                    <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
+                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
                     <div class="ml-2 d-flex flex-column flex-grow-1">
                         <p class="mb-0">{{ $user->name }}</p>
                         <a href="{{ route('users.show', $timeline->user_id) }}" class="text-secondary">{{ $timeline->user_id }}</a>
@@ -77,11 +78,10 @@
             </div>
             @endforeach
         </div>
+        @endif
     </div>
-    @endif
-</div>
-<div class="my-4 d-flex justify-content-center">
-    {{ $timelines->links() }}
-</div>
+    <div class="my-4 d-flex justify-content-center">
+        {{ $timelines->links() }}
+    </div>
 </div>
 @endsection
