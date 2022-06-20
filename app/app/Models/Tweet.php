@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
 
-
 class Tweet extends Model
 {
     use SoftDeletes;
@@ -21,7 +20,7 @@ class Tweet extends Model
     ];
 
     /**
-     * User::classのデータへリレーション
+     * usersテーブルとのリレーションを定義
      */
     public function user()
     {
@@ -29,7 +28,7 @@ class Tweet extends Model
     }
 
     /**
-     * Favorite::classのデータへリレーション
+     * favoritesテーブルとのリレーションを定義
      * 1つの投稿に対して、Favoriteのデータ取得
      */
     public function favorites()
@@ -38,7 +37,7 @@ class Tweet extends Model
     }
 
     /**
-     * 	Comment::classのデータへリレーション
+     * 	commentsテーブルとのリレーション
      * 1つの投稿に対して、Commentのデータ取得
      */
     public function comments()
@@ -50,6 +49,8 @@ class Tweet extends Model
      * $user_idとTweetテーブル'user_id'が一致する投稿を新着順で1ページ50件ずつ表示
      * 
      * @param string $user_id
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function getUserTimeLine(string $user_id)
     {

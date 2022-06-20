@@ -37,7 +37,6 @@
                                 @if ($isFollowed)
                                 <span class="mt-2 px-1 bg-secondary text-light">{{ __('Followed') }}</span>
                                 @endif
-                                @endif
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -78,11 +77,10 @@
             </div>
             @endforeach
         </div>
+        @endif
     </div>
-    @endif
-</div>
-<div class="my-4 d-flex justify-content-center">
-    {{ $timelines->links() }}
-</div>
+    <div class="my-4 d-flex justify-content-center">
+        {{ $timelines->links() }}
+    </div>
 </div>
 @endsection
