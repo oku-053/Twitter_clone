@@ -15,10 +15,10 @@ class TweetsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 60; $i++) {
             Tweet::create([
-                'user_id'    => 'test_user'+$i,
-                'text'       => 'テスト投稿' .$i,
+                'user_id'    => 'test_user1',
+                'text'       => 'ページテスト投稿',
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

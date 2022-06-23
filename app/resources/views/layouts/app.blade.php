@@ -18,7 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
@@ -77,25 +78,27 @@
         </nav>
 
         {{-- 3カラムに変更 --}}
-        <main class="py-4">
+        <main class="py-0">
             <div class="row">
-                <div class="col-md-2">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/profile">{{ __('Profile') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/tweet">{{ __('Tweet') }}</a>
-                        </li>
-                    </ul>
+                <div class="col-2">
+                    <div sidebar_fixed>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.show', $user_id = Auth::id()) }}">{{ __('Profile') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/tweet">{{ __('Tweet') }}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col">
                     @yield('content')
                 </div>
             </div>
