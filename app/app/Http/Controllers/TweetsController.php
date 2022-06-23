@@ -2,20 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tweet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\models\User;
+use App\Models\Tweet;
+use App\models\Follower;
 
 class TweetsController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @param Tweet $tweet
+     * @param Follower $follower
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Tweet $tweet, Follower $follower)
     {
-        //
+        $user = auth()->user();
+        $followIds = $follower->followingIds($user->user_id);
+        $followingIds = $followIds->pluck('followed_user_id')->toArray();
+
+        $timelines = $tweet->getTimelines($user->user_id, $followingIds);
+
+        return view('tweets.index', [
+            'user'      => $user,
+            'timelines' => $timelines,
+            'followingIds' => $followingIds
+        ]);
     }
 
     /**

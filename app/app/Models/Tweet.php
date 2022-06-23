@@ -83,4 +83,18 @@ class Tweet extends Model
 
         return;
     }
+
+    /**
+     * 一覧表示
+     * 
+     * @param string $user_id
+     * @param array $follow_ids
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getTimeLines(string $user_id, array $follow_ids)
+    {
+        $follow_ids[] = $user_id;
+        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
+    }
 }

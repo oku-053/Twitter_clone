@@ -84,7 +84,7 @@
                     <div sidebar_fixed>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+                                <a class="nav-link" href="{{ route('tweets.index') }}">{{ __('Home') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
