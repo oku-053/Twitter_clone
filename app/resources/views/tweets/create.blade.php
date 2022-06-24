@@ -19,7 +19,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
+                                <textarea class="form-control @error('text') is-invalid @enderror" id="tweetForm" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
 
                                 @error('text')
                                 <span class="invalid-feedback" role="alert">
@@ -31,8 +31,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 text-right">
-                                <p class="mb-4 text-danger">{{ __('Within 140 characters') }}</p>
-                                <button type="submit" class="btn btn-primary">
+                                <p id="inputCount" class="mb-4 text-dark"><span id="inputCounter">{{ __('0') }}</span>{{ __('characters') }}</p>
+                                <script src="{{ mix('js/tweet.js') }}"></script>
+                                <button type="submit" id="tweetButton" class="btn btn-primary">
                                     {{ __('Tweet') }}
                                 </button>
                             </div>
