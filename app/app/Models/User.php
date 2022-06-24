@@ -92,17 +92,17 @@ class User extends Authenticatable
     {
         if (isset($params['profile_image'])) {
             $file_name = $params['profile_image']->store('public/profile_image/');
-            $this::where('user_id', $this->user_id)
+            $this->where('user_id', $this->user_id)
                 ->update([
-                    'name'          => $params['name'],
+                    'name' => $params['name'],
                     'profile_image' => basename($file_name),
-                    'email'         => $params['email'],
+                    'email' => $params['email'],
                 ]);
         } else {
-            $this::where('user_id', $this->user_id)
+            $this->where('user_id', $this->user_id)
                 ->update([
-                    'name'          => $params['name'],
-                    'email'         => $params['email'],
+                    'name'  => $params['name'],
+                    'email' => $params['email'],
                 ]);
         }
 

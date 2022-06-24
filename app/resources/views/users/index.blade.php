@@ -23,13 +23,13 @@
                             <div class="d-flex justify-content-end flex-grow-1">
                                 @if (auth()->user()->isFollowing($user->user_id))
                                     <form action="{{ route('unfollow', ['user' => $user->user_id]) }}" method="POST">
-                                        {{ csrf_field() }}
+                                        @csrf
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">{{ __('un_Follow') }}</button>
                                     </form>
                                 @else
                                     <form action="{{ route('follow', ['user' => $user->user_id]) }}" method="POST">
-                                        {{ csrf_field() }}
+                                        @csrf
 
                                         <button type="submit" class="btn btn-primary">{{ __('Follow') }}</button>
                                     </form>

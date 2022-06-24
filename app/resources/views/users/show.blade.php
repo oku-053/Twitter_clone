@@ -22,19 +22,15 @@
                                             class="btn btn-primary">{{ __('edit_profile') }}</a>
                                     @else
                                         @if ($isFollowing)
-                                            <form action="{{ route('unfollow', ['user' => $user->user_id]) }}"
-                                                method="POST">
-                                                {{ csrf_field() }}
+                                            <form action="{{ route('unfollow', ['user' => $user->user_id]) }}" method="POST">
+                                                @csrf
                                                 {{ method_field('DELETE') }}
-
                                                 <button type="submit"
                                                     class="btn btn-danger">{{ __('un_Follow') }}</button>
                                             </form>
                                         @else
-                                            <form action="{{ route('follow', ['user' => $user->user_id]) }}"
-                                                method="POST">
-                                                {{ csrf_field() }}
-
+                                            <form action="{{ route('follow', ['user' => $user->user_id]) }}" method="POST">
+                                                @csrf
                                                 <button type="submit"
                                                     class="btn btn-primary">{{ __('Follow') }}</button>
                                             </form>
