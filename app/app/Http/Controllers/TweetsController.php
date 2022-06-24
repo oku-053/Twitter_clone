@@ -41,13 +41,13 @@ class TweetsController extends Controller
     public function store(Request $request, Tweet $tweet)
     {
         $user = auth()->user();
-        $data = $request->all();
-        $validator = Validator::make($data, [
+        $requestData = $request->all();
+        $validator = Validator::make($requestData, [
             'text' => ['required', 'string', 'max:140']
         ]);
 
         $validator->validate();
-        $tweet->tweetStore($user->user_id, $data);
+        $tweet->tweetStore($user->user_id, $requestData);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }

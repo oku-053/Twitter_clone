@@ -1,23 +1,21 @@
 //文字数カウント
-var input = document.getElementById("tweetForm");
-var span = document.getElementById("inputCounter");
-class2 = "mb-4 text-danger"
-class1 =  document.getElementById("inputCount").className
+var formInput = document.getElementById("tweetForm");
+var counterSpan = document.getElementById("inputCounter");
+class_danger = "mb-4 text-danger"
+class_default =  document.getElementById("inputCount").className
 
-input.addEventListener("keyup", function() {
-  span.textContent = input.value.length;
+formInput.addEventListener("keyup", function() {
+  counterSpan.textContent = formInput.value.length;
   switch(true){
-    case span.textContent > 140:
-        document.getElementById("inputCount").className = class2;
+    case counterSpan.textContent > 140:
+        document.getElementById("inputCount").className = class_danger;
         document.getElementById("tweetButton").disabled = true;
         break;
     default:
-        document.getElementById("inputCount").className = class1;
+        document.getElementById("inputCount").className = class_default;
         document.getElementById("tweetButton").disabled = false;
   }
 });
-
-console.log("test1")
 
 
 

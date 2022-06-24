@@ -10,7 +10,6 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('tweets.store') }}">
                         @csrf
-
                         <div class="form-group row mb-0">
                             <div class="col-md-12 p-3 w-100 d-flex">
                                 <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
