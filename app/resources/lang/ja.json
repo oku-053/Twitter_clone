@@ -42,5 +42,6 @@
     "Tweet_count":"ツイート数",
     "Follow_count":"フォロー数",
     "Follower_count":"フォロワー数",
-    "edit_profile":"プロフィールを編集"
+    "edit_profile":"プロフィールを編集",
+    "update":"更新"
 } 
