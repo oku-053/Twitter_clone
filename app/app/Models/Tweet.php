@@ -24,7 +24,7 @@ class Tweet extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -97,4 +97,11 @@ class Tweet extends Model
         $follow_ids[] = $user_id;
         return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
+
+    // 主キーカラム名を指定
+    protected $primaryKey = 'tweet_id';
+    // オートインクリメント無効化
+    public $incrementing = false;
+    // 主キーの型指名
+    protected $keyType = 'Int';
 }
