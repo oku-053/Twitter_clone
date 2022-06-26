@@ -130,7 +130,6 @@ class UsersController extends Controller
             'name'          => ['required', 'string', 'max:255'],
             'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->user_id, 'user_id')]
-            //Rule~で自分のIDの時だけユニーク設定を無効にできるらしい
         ]);
         $validator->validate();
         $user->updateProfile($data);
