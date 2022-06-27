@@ -67,12 +67,18 @@ class TweetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tweet $tweet)
     {
-        //
+        $user = auth()->user();
+        $tweet = $tweet->getTweet($tweet->tweet_id);
+
+        return view('tweets.show', [
+            'user'     => $user,
+            'tweet' => $tweet
+        ]);
     }
 
     /**

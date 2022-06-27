@@ -10,7 +10,7 @@
                 <div class="card-haeder p-3 w-100 d-flex">
                     <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                     <div class="ml-2 d-flex flex-column">
-                        <p class="mb-0">{{ $timeline->name }}</p>
+                        <p class="mb-0">{{ $timeline->user->name }}</p>
                         <a href="{{ route('users.show', $timeline->user_id) }}" class="text-secondary">{{ $timeline->user_id }}</a>
                     </div>
                     <div class="d-flex justify-content-end flex-grow-1">
@@ -19,6 +19,7 @@
                 </div>
                 <div class="card-body">
                     {!! nl2br(e($timeline->text)) !!}
+                    <a href="{{ route('tweets.show',$timeline->tweet_id) }}" class="card__link"></a>
                 </div>
                 <div class="card-footer py-1 d-flex justify-content-end bg-white">
                     @if ($timeline->user_id === Auth::id())

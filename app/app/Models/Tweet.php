@@ -98,6 +98,12 @@ class Tweet extends Model
         return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
 
+    // 詳細画面
+    public function getTweet(string $tweet_id)
+    {
+        return $this->with('user')->where('tweet_id', $tweet_id)->first();
+    }
+
     // 主キーカラム名を指定
     protected $primaryKey = 'tweet_id';
     // オートインクリメント無効化
