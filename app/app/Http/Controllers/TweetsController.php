@@ -37,10 +37,8 @@ class TweetsController extends Controller
      */
     public function create()
     {
-        $user = auth()->user();
-
         return view('tweets.create', [
-            'user' => $user
+            'user' => auth()->user()
         ]);
     }
 
@@ -48,64 +46,18 @@ class TweetsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param Tweet $tweet
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Tweet $tweet)
     {
-        $user = auth()->user();
-        $requestData = $request->all();
-        $validator = Validator::make($requestData, [
+        $requestText = $request->input('text');
+        $request->validate([
             'text' => ['required', 'string', 'max:140']
         ]);
-
-        $validator->validate();
-        $tweet->tweetStore($user->user_id, $requestData);
+        $user = auth()->user();
+        $tweet->tweetStore($user->user_id, $requestText);
 
         return back()->with('flash_message', 'Tweeting is complete!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
