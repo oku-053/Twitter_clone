@@ -41,5 +41,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('users/{user}/unfollow', 'App\Http\Controllers\UsersController@unfollow')->name('unfollow');
 
     // ツイート関連
-    Route::resource('tweets', 'App\Http\Controllers\TweetsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
+    Route::resource('tweets', 'App\Http\Controllers\TweetsController', ['only' => ['index', 'create', 'store', 'show', 'destroy']]);
 });

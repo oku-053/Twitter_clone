@@ -73,12 +73,12 @@ class Tweet extends Model
      * ツイート保存
      * 
      * @param string $user_id
-     * @param Array $data
+     * @param string $textt
      */
-    public function tweetStore(string $user_id, array $data)
+    public function tweetStore(string $user_id, string $text)
     {
         $this->user_id = $user_id;
-        $this->text = $data['text'];
+        $this->text = $text;
         $this->save();
 
         return;
