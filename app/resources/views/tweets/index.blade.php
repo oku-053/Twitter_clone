@@ -8,7 +8,7 @@
         <div class="col-md-8 mb-3">
             <div class="card">
                 <div class="card-haeder p-3 w-100 d-flex" style="z-index:2">
-                    <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                    <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" alt onerror="this.onerror = null; this.src='https://placehold.jp/50x50.png';" class="rounded-circle" width="50" height="50">
                     <div class="ml-2 d-flex flex-column">
                         <p class="mb-0">{{ $timeline->user->name }}</p>
                         <a href="{{ route('users.show', $timeline->user_id) }}" class="text-secondary">{{ $timeline->user_id }}</a>
@@ -31,7 +31,7 @@
                             <form method="POST" action="{{ route('tweets.show', $timeline->user_id) }}" class="mb-0">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="dropdown-item del-btn">削除</button>
+                                <button type="submit" class="dropdown-item del-btn">{{ __('delete') }}</button>
                             </form>
                         </div>
                     </div>

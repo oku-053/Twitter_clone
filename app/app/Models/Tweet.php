@@ -98,6 +98,16 @@ class Tweet extends Model
         return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
 
+    /**
+     * 全ツイート一覧表示
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllTimeLines()
+    {
+        return $this->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
+    }
+
     // 詳細画面
     public function getTweet(string $tweet_id)
     {

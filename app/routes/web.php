@@ -21,9 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //初期表示のページ
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\WelcomeController@index');
 
 Auth::routes();
 
