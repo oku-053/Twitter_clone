@@ -35,7 +35,7 @@ class Follower extends Model
      * @param string $user_id
      * @return stirng followed_user_id
      */
-    public function followingIds(string $user_id)
+    public function getFollowingIds(string $user_id)
     {
         return $this->where('following_user_id', $user_id)->get('followed_user_id');
     }
