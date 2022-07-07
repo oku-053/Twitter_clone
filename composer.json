@@ -1,0 +1,10 @@
+{
+    "name": "ec2-user/twitter_clone",
+    "description": "\"The Laravel Framework.\"",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+    
+    }
+}
