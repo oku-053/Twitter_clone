@@ -1,3 +1,5 @@
+
+
 /node_modules
 /public/hot
 /public/storage
@@ -13,5 +15,3 @@ yarn-error.log
 /.idea
 /.vscode
 .gitignoretest.txt
-.env
-.env.testing
