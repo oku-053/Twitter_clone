@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
-use App\Models\Tweet;
 use App\Models\Follower;
+use App\Models\Tweet;
+use App\Models\User;
 
 class TweetsController extends Controller
 {
@@ -20,11 +20,11 @@ class TweetsController extends Controller
     public function index(Tweet $tweet, Follower $follower)
     {
         $loginUser = auth()->user();
-        $followIds = $follower->getFollowingIds($loginUser->user_id);
+        $followIds = $follower->getFollowIds($loginUser->user_id);
         $followingIds = $followIds->pluck('followed_user_id')->toArray();
         $timelines = $tweet->getTimelines($loginUser->user_id, $followingIds);
         return view('tweets.index', [
-            'user'      => $loginUser,
+            'loginUser'      => $loginUser,
             'timelines' => $timelines,
             'followingIds' => $followingIds,
         ]);
