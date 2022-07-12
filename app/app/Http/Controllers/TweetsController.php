@@ -20,7 +20,7 @@ class TweetsController extends Controller
     public function index(Tweet $tweet, Follower $follower)
     {
         $loginUser = auth()->user();
-        $followIds = $follower->getFollowIds($loginUser->user_id);
+        $followIds = $follower->getFollowingIds($loginUser->user_id);
         $followingIds = $followIds->pluck('followed_user_id')->toArray();
         $timelines = $tweet->getTimelines($loginUser->user_id, $followingIds);
         return view('tweets.index', [
