@@ -24,7 +24,7 @@ class Tweet extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -83,4 +83,41 @@ class Tweet extends Model
 
         return;
     }
+
+    /**
+     * 一覧表示
+     * 
+     * @param string $user_id
+     * @param array $follow_ids
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getTimeLines(string $user_id, array $follow_ids)
+    {
+        $follow_ids[] = $user_id;
+        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
+    }
+
+    /**
+     * 全ツイート一覧表示
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllTimeLines()
+    {
+        return $this->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
+    }
+
+    // 詳細画面
+    public function getTweet(string $tweet_id)
+    {
+        return $this->with('user')->where('tweet_id', $tweet_id)->first();
+    }
+
+    // 主キーカラム名を指定
+    protected $primaryKey = 'tweet_id';
+    // オートインクリメント無効化
+    public $incrementing = false;
+    // 主キーの型指名
+    protected $keyType = 'Int';
 }
