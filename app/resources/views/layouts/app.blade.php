@@ -105,8 +105,7 @@
                 </a>
             </li>
             <li>
-                <a class="btn btn-md btn-primary" href="{{ route('tweets.create') }}">
-                    <svg class="bi me-2" width="16" height="16"></svg>
+                <a class="btn btn-md btn-primary-tweet" href="{{ route('tweets.create') }}">
                     {{ __('Tweet') }}
                 </a>
             </li>
