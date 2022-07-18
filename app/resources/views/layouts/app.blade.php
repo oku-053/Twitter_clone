@@ -61,80 +61,58 @@
             </nav>
         </div>
 
-        {{-- <div class="container-xxl my-md-4 bd-layout">
-            <aside class="bd-sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('tweets.index') }}">{{ __('Home') }}</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('users.show', $user_id = Auth::id()) }}">{{__('Profile')}}</a>
-        </li>
-        <li class="nav-item">
-            <a class="btn btn-md btn-primary" href="{{ route('tweets.create') }}">{{ __('Tweet') }}</a>
-        </li>
-        </ul>
+        @auth
+        <aside class="bd-sidebar" style="z-index:1">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li>
+                    <a href="{{ route('tweets.index') }}" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16"></svg>
+                        {{ __('Home') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('users.index') }}" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16"></svg>
+                        {{ __('Users') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('users.show', $user_id = Auth::id()) }}" class="nav-link link-dark">
+                        <svg class="bi me-2" width="16" height="16"></svg>
+                        {{__('Profile')}}
+                    </a>
+                </li>
+                <li>
+                    <a class="btn btn-md btn-primary" href="{{ route('tweets.create') }}">
+                        <svg class="bi me-2" width="16" height="16"></svg>
+                        {{ __('Tweet') }}
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="authDropdown" style="bottom: 0;">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ asset('storage/profile_image/' . Auth::user()->profile_image) }}" alt onerror="this.onerror = null; this.src='https://placehold.jp/50x50.png';" width="32" height="32" class="rounded-circle me-2">
+                    <strong>{{ Auth::user()->name }}</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </aside>
+        @endauth
+
         <main class="bd-main order-1">
             @yield('content')
         </main>
-    </div> --}}
-
-    @auth
-    <aside class="bd-sidebar" style="z-index:1">
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li>
-                <a href="{{ route('tweets.index') }}" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"></svg>
-                    {{ __('Home') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('users.index') }}" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"></svg>
-                    {{ __('Users') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('users.show', $user_id = Auth::id()) }}" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"></svg>
-                    {{__('Profile')}}
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-md btn-primary" href="{{ route('tweets.create') }}">
-                    <svg class="bi me-2" width="16" height="16"></svg>
-                    {{ __('Tweet') }}
-                </a>
-            </li>
-        </ul>
-        <hr>
-        <div class="authDropdown" style="bottom: 0;">
-            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('storage/profile_image/' . Auth::user()->profile_image) }}" alt onerror="this.onerror = null; this.src='https://placehold.jp/50x50.png';" width="32" height="32" class="rounded-circle me-2">
-                <strong>{{ Auth::user()->name }}</strong>
-            </a>
-            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                <li>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </aside>
-    @endauth
-
-    <main class="bd-main order-1">
-        @yield('content')
-    </main>
     </div>
 </body>
 

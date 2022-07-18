@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,7 +48,7 @@ class User extends Authenticatable
 
     public function tweet()
     {
-        return $this->hasOne(Tweet::class);
+        return $this->hasMany(Tweet::class);
     }
 
     //ユーザー一覧表示
@@ -112,6 +113,17 @@ class User extends Authenticatable
         }
 
         return;
+    }
+
+    /**
+     * ログイン中かどうか判定
+     * @param string $user_id
+     * 
+     * @return boolen 
+     */
+    public function loginDecision(string $user_id)
+    {
+        return ($user_id === Auth::user()->user_id) ? true : false;
     }
 
     // 主キーカラム名を指定

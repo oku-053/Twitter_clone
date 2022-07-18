@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
 
-class WelcomeController extends Controller
+class TopController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class WelcomeController extends Controller
     public function index(Tweet $tweet)
     {
         $timelines = $tweet->getAllTimelines();
-        return view('welcome', [
+        return view('top', [
             'timelines' => $timelines,
         ]);
     }

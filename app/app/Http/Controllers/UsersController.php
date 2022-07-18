@@ -40,6 +40,7 @@ class UsersController extends Controller
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
         $loginUser = auth()->user(); //ログインしている自分自身
+        $loginDecision = $user->loginDecision($user->user_id);
         $timelines = $tweet->getUserTimeLine($user->user_id);
         $isFollowing = $loginUser->isFollowing($user->user_id);
         $isFollowed = $loginUser->isFollowed($user->user_id);
@@ -51,6 +52,7 @@ class UsersController extends Controller
 
         return view('users.show', [
             'user'           => $user,
+            'loginDecision' => $loginDecision,
             'isFollowing'   => $isFollowing,
             'isFollowed'    => $isFollowed,
             'timelines'      => $timelines,

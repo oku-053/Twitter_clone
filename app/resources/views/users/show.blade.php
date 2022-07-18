@@ -16,7 +16,7 @@
                     <div class="p-3 d-flex flex-column justify-content-between">
                         <div class="d-flex">
                             <div>
-                                @if ($user->user_id === Auth::user()->user_id)
+                                @if($loginDecision)
                                 <a href="{{ route('users.edit', $user->user_id) }}" class="btn btn-primary">{{ __('edit_profile') }}</a>
                                 @else
                                 @if ($isFollowing)
