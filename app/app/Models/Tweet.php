@@ -73,7 +73,7 @@ class Tweet extends Model
      * ツイート保存
      * 
      * @param string $user_id
-     * @param string $textt
+     * @param string $text
      */
     public function tweetStore(string $user_id, string $text)
     {
