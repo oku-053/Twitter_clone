@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\UserRequest;
 use App\models\Follower;
 use App\models\Tweet;
 use App\models\User;
@@ -118,19 +116,14 @@ class UsersController extends Controller
      * 
      * @access public
      * @param User $user
-     * @param Request $request
+     * @param UserRequest $request
      *  
      * @see updateProfile
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $data = $request->all();
-        $request->validate([
-            'name'          => ['required', 'string', 'max:255'],
-            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->user_id, 'user_id')]
-        ]);
         $user->updateProfile($data);
 
         return redirect(route('users.show', $user->user_id));
