@@ -11,7 +11,7 @@
                     <img src="{{ asset('storage/profile_image/' . $user->profile_image) }}" alt onerror="this.onerror = null; this.src='https://placehold.jp/50x50.png';" class="rounded-circle" width="50" height="50">
                     <div class="ml-2 d-flex flex-column">
                         <p class="mb-0">{{ $user->name }}</p>
-                        <a href="{{ url('users/' . $user->user_id) }}" class="text-secondary">{{ $user->user_id }}</a>
+                        <a href="{{ route('users.show', $user->user_id) }}" class="text-secondary">{{ $user->user_id }}</a>
                     </div>
                     @if (auth()->user()->isFollowed($user->user_id))
                     <div class="px-2">
