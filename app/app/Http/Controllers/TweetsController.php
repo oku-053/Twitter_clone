@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TweetRequest;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Follower;
 use App\Models\Tweet;
-use App\Models\User;
-use Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface;
 
 class TweetsController extends Controller
 {
@@ -20,11 +17,10 @@ class TweetsController extends Controller
      */
     public function index(Tweet $tweet, Follower $follower)
     {
-        $loginUser = auth()->user();
-        $followIds = $follower->getFollowIds($loginUser->user_id);
-        $timelines = $tweet->getTimelines($loginUser->user_id, $followIds);
+        $loginUserId = auth()->user()->user_id;
+        $followIds = $follower->getFollowIds($loginUserId);
+        $timelines = $tweet->getTimelines($loginUserId, $followIds);
         return view('tweets.index', [
-            'loginUser'      => $loginUser,
             'timelines' => $timelines,
             'followIds' => $followIds,
         ]);
@@ -67,11 +63,11 @@ class TweetsController extends Controller
     public function show(Tweet $tweet)
     {
         $user = auth()->user();
-        $tweet = $tweet->getTweet($tweet->tweet_id);
+        $targetTweet = $tweet->getTweet($tweet->tweet_id);
 
         return view('tweets.show', [
             'user'     => $user,
-            'tweet' => $tweet
+            'tweet' => $targetTweet
         ]);
     }
 }

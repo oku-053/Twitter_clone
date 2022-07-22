@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests;
 
-class TweetRequest extends ApiRequest
+use Illuminate\Foundation\Http\FormRequest;
+class TweetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
