@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
 
 class User extends Authenticatable
 {
@@ -44,6 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tweet()
+    {
+        return $this->hasMany(Tweet::class);
+    }
 
     //ユーザー一覧表示
     public function getAllUsers(string $user_id)
@@ -107,6 +111,17 @@ class User extends Authenticatable
         }
 
         return;
+    }
+
+    /**
+     * ログイン中かどうか判定
+     * @param string $user_id
+     * 
+     * @return boolen 
+     */
+    public function loginDecision(string $user_id)
+    {
+        return ($user_id === Auth::user()->user_id) ? true : false;
     }
 
     // 主キーカラム名を指定
