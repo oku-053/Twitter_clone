@@ -94,7 +94,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getTimeLines(string $user_id, array $follow_ids): Collection
+    public function getTimeLines(string $user_id, array $follow_ids)
     {
         $follow_ids[] = $user_id;
         return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
@@ -105,7 +105,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getAllTimeLines(): Collection
+    public function getAllTimeLines()
     {
         return $this->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
