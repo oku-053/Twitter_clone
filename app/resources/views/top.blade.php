@@ -25,13 +25,20 @@
                 </div>
             @endforeach
         @else
-            <div class="col-md-8 mb-0">
-                <div class="card">
-                    <div class="card-body">
-                        {{ __('Log in and tweet for the first time!') }}
+        <div class="col-md-8 mb-0">
+            <div class="card">
+                <div class="card-haeder p-3 w-100 d-flex" style="z-index:2">
+                    <img src='https://placehold.jp/50x50.png';" class="rounded-circle" width="50" height="50">
+                    <div class="ml-2 d-flex flex-column">
+                        <p class="mb-0">{{__('Twitter') }}</p>
+                        <a href="{{ route('users.show', $timeline->user_id) }}" class="text-secondary">{{ __('Twiiter000') }}</a>
                     </div>
                 </div>
+                <div class="card-body">
+                    {{ __('Log in and tweet for the first time!') }}
+                </div>
             </div>
+        </div>
         @endif
     </div>
     <div class="my-4 d-flex justify-content-center">
