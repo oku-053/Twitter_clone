@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TweetRequest;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use App\Models\Favorite;
 use App\Models\Follower;
 use App\Models\Tweet;
-use App\Models\User;
-use Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface;
+
+
 
 class TweetsController extends Controller
 {
@@ -23,10 +24,13 @@ class TweetsController extends Controller
         $loginUser = auth()->user();
         $followIds = $follower->getFollowIds($loginUser->user_id);
         $timelines = $tweet->getTimelines($loginUser->user_id, $followIds);
+        $favoriteJudge = $tweet->isFavoritedBy($loginUser);
+
         return view('tweets.index', [
             'loginUser'      => $loginUser,
             'timelines' => $timelines,
             'followIds' => $followIds,
+            'favoriteJudge' => $favoriteJudge,
         ]);
     }
 
@@ -73,5 +77,13 @@ class TweetsController extends Controller
             'user'     => $user,
             'tweet' => $tweet
         ]);
+    }
+
+    public function favorite(Request $request, Favorite $favorite)
+    {
+        $loginUserId = auth()->user()->user_id; 
+        $tweetId = $request->tweet_id;
+        $favorite->favorite($loginUserId, $tweetId);
+        return response()->json(); 
     }
 }

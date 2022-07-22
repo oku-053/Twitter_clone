@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             @if (isset($timelines))
+            <script src="{{ mix('js/favorite.js') }}"></script>
                 @foreach ($timelines as $timeline)
                     <div class="col-md-8 mb-0">
                         <div class="card">
@@ -21,6 +22,17 @@
                                 {!! nl2br(e($timeline->text)) !!}
                                 <a href="{{ route('tweets.show',$timeline->tweet_id) }}" class="card__link"></a>
                             </div>
+                            @if ($favoriteJudge)
+                                <span class="favorites" style="z-index:3">
+                                <i class="fa-solid fa-heart favoriteToggle" data-tweet-id="{{ $timeline->tweet_id }}"></i>
+                                <span class="favo-counter">{{'B'}}</span>
+                                </span><!-- /.likes -->
+                            @else
+                                <span class="favorites" style="z-index:3">
+                                    <i class="fa-solid fa-heart favoriteToggle"  data-tweet-id="{{ $timeline->tweet_id }}"></i>
+                                <span class="favo-counter">{{'A'}}</span>
+                                </span><!-- /.likes -->
+                            @endif
                         </div>
                     </div>
                 @endforeach

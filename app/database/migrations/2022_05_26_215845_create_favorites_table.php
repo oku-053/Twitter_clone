@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->increments('favo_id');
+            $table->increments('favorite_id');
             $table->string('user_id')->comment('ユーザーID');
             $table->unsignedInteger('tweet_id')->comment('ツイートID');
+            $table->timestamps();
 
-            $table->index('favo_id');
+            $table->index('favorite_id');
             $table->index('user_id');
             $table->index('tweet_id');
 

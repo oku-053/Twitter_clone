@@ -114,6 +114,10 @@ class Tweet extends Model
         return $this->with('user')->where('tweet_id', $tweet_id)->first();
     }
 
+    public function isFavoritedBy(string $user_id): bool {
+        return Favorite::where('user_id', $user_id)->where('tweet_id', $this->tweet_id)->first() !==null;
+    }  
+
     // 主キーカラム名を指定
     protected $primaryKey = 'tweet_id';
     // オートインクリメント無効化
