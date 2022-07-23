@@ -126,6 +126,11 @@ class User extends Authenticatable
         return ($user_id === Auth::user()->user_id) ? true : false;
     }
 
+    public function favorite()
+    {
+        return $this->hasMany('App\Favorite');
+    }
+
     // 主キーカラム名を指定
     protected $primaryKey = 'user_id';
     // オートインクリメント無効化

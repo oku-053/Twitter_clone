@@ -44,6 +44,10 @@ class Tweet extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function tweet()
+    {
+        return $this->hasMany(Tweet::class);
+    }
 
     /**
      * $user_idとTweetテーブル'user_id'が一致する投稿を新着順で1ページ50件ずつ表示
@@ -112,11 +116,24 @@ class Tweet extends Model
     public function getTweet(string $tweet_id)
     {
         return $this->with('user')->where('tweet_id', $tweet_id)->first();
-    }
-
-    public function isFavoritedBy(string $user_id): bool {
-        return Favorite::where('user_id', $user_id)->where('tweet_id', $this->tweet_id)->first() !==null;
     }  
+
+    public function isFavoritedBy($user): bool {
+        return Favorite::where('user_id', $user->user_id)->where('tweet_id', $this->tweet_id)->first() !==null;
+    }
+    public function favoritesCount()
+    {
+        $tweetFavoritesCount = Favorite::where('tweet_id',$this->tweet_id)->count();
+        $param = [
+        'review_likes_count' => $tweetFavoritesCount,
+        ];
+        if($tweetFavoritesCount !== null){
+            return $tweetFavoritesCount;
+        }
+        else{
+            return 0;
+        }
+    }
 
     // 主キーカラム名を指定
     protected $primaryKey = 'tweet_id';

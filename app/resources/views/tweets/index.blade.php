@@ -22,15 +22,15 @@
                                 {!! nl2br(e($timeline->text)) !!}
                                 <a href="{{ route('tweets.show',$timeline->tweet_id) }}" class="card__link"></a>
                             </div>
-                            @if ($favoriteJudge)
+                            @if (!$timeline->isfavoritedBy(Auth::user()))
                                 <span class="favorites" style="z-index:3">
                                 <i class="fa-solid fa-heart favoriteToggle" data-tweet-id="{{ $timeline->tweet_id }}"></i>
-                                <span class="favo-counter">{{'B'}}</span>
+                                <span class="favo-counter">{{$timeline->favoritesCount()}}</span>
                                 </span><!-- /.likes -->
                             @else
                                 <span class="favorites" style="z-index:3">
-                                    <i class="fa-solid fa-heart favoriteToggle"  data-tweet-id="{{ $timeline->tweet_id }}"></i>
-                                <span class="favo-counter">{{'A'}}</span>
+                                    <i class="fa-solid fa-heart favoriteToggle favorite"  data-tweet-id="{{ $timeline->tweet_id }}"></i>
+                                <span class="favo-counter">{{$timeline->favoritesCount()}}</span>
                                 </span><!-- /.likes -->
                             @endif
                         </div>

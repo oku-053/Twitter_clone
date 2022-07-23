@@ -17,15 +17,11 @@ class FavoritesController extends Controller
      */
     public function favorite(Request $request ,Favorite $favorite)
     {
-        dd($request);
         $userId = auth()->user()->user_id; 
         $tweetId = $request->tweetId;
-
         $favorite->favorite($userId,$tweetId);
-
-        $tweetFavoritesCount = Tweet::withCount('favorites')->findOrFail($tweetId)->favoriteCount($tweetId);
         $param = [
-            'tweetFavoritesCount' => $tweetFavoritesCount,
+            'tweetFavoritesCount' => $favorite->tweetFavoritesCount,
         ];
         return response()->json($param); 
     }

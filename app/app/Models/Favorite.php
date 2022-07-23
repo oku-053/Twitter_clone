@@ -28,19 +28,19 @@ class Favorite extends Model
      * 
      * @return  void
      */
-    public function favorite(string $loginUserId, int $tweetId) : void
+    public function favorite(string $loginUserId, int $tweetId)
     {   
         //ユーザーがこの投稿にいいねをしているか
         $alreadyFavorite = $this->where('user_id', $loginUserId)->where('tweet_id', $tweetId)->first();
 
         if (!$alreadyFavorite) { 
-            $favorite = new Favorite; 
-            $favorite->tweet_id = $tweetId; 
-            $favorite->user_id = $loginUserId;
-            $favorite->save();
+            $this->user_id = $loginUserId;
+            $this->tweet_id = $tweetId;
+            $this->save();
 
         } else { 
             Favorite::where('tweet_id', $tweetId)->where('user_id', $loginUserId)->delete();
         }
+        return response();
     }
 }
