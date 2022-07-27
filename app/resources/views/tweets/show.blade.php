@@ -18,6 +18,17 @@
                     <div class="card-body">
                         {!! nl2br(e($tweet->text)) !!}
                     </div>
+                        @if (!$tweet->isfavoritedBy(Auth::user()))
+                            <span class="favorites" style="z-index:3">
+                            <i class="fa-solid fa-heart favoriteToggle" data-tweet-id="{{ $tweet->tweet_id }}"></i>
+                            <span class="favoriteCounter">{{$tweet->favoritesCount()}}</span>
+                            </span>
+                        @else
+                            <span class="favorites" style="z-index:3">
+                                <i class="fa-solid fa-heart favoriteToggle favorite"  data-tweet-id="{{ $tweet->tweet_id }}"></i>
+                            <span class="favoriteCounter">{{$tweet->favoritesCount()}}</span>
+                            </span>
+                        @endif
                 </div>
             </div>
         </div>

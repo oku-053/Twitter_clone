@@ -48,9 +48,9 @@ class TweetsController extends Controller
      */
     public function store(TweetRequest $request, Tweet $tweet)
     {
+        $loginUser = auth()->user();
         $requestText = $request->input('text');
-        $user = auth()->user();
-        $tweet->tweetStore($user->user_id, $requestText);
+        $tweet->tweetStore($loginUser->user_id, $requestText);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }

@@ -42,5 +42,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('tweets', 'App\Http\Controllers\TweetsController', ['only' => ['index', 'create', 'store', 'show', 'destroy']]);
 
     Route::post('tweets/favorite/{id}', 'App\Http\Controllers\FavoritesController@favorite')->name('tweets.favorite');
-
 });

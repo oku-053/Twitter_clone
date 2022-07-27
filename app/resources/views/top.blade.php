@@ -21,6 +21,10 @@
                     {!! nl2br(e($timeline->text)) !!}
                     <a href="{{ route('tweets.show',$timeline->tweet_id) }}" class="card__link"></a>
                 </div>
+                    <span class="favorites" style="z-index:3">
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                    </span>
             </div>
         </div>
         @endforeach

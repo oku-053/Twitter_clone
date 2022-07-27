@@ -25,13 +25,13 @@
                             @if (!$timeline->isfavoritedBy(Auth::user()))
                                 <span class="favorites" style="z-index:3">
                                 <i class="fa-solid fa-heart favoriteToggle" data-tweet-id="{{ $timeline->tweet_id }}"></i>
-                                <span class="favo-counter">{{$timeline->favoritesCount()}}</span>
-                                </span><!-- /.likes -->
+                                <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                                </span>
                             @else
                                 <span class="favorites" style="z-index:3">
                                     <i class="fa-solid fa-heart favoriteToggle favorite"  data-tweet-id="{{ $timeline->tweet_id }}"></i>
-                                <span class="favo-counter">{{$timeline->favoritesCount()}}</span>
-                                </span><!-- /.likes -->
+                                <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                                </span>
                             @endif
                         </div>
                     </div>

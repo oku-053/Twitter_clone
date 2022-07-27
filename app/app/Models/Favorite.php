@@ -26,7 +26,7 @@ class Favorite extends Model
      * @param  int  $loginUserId
      * @param  int  $tweetId
      * 
-     * @return  void
+     * @return  response
      */
     public function favorite(string $loginUserId, int $tweetId)
     {   
@@ -41,6 +41,16 @@ class Favorite extends Model
         } else { 
             Favorite::where('tweet_id', $tweetId)->where('user_id', $loginUserId)->delete();
         }
+
         return response();
+    }
+
+    public function favoritesCountJson(int $tweetId)
+    {
+        $tweetFavoritesCount = Favorite::where('tweet_id',$tweetId)->count();
+        $param = [
+        'tweetFavoritesCount' => $tweetFavoritesCount,
+        ];
+        return $param;
     }
 }

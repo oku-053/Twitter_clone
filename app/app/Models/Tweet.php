@@ -118,9 +118,21 @@ class Tweet extends Model
         return $this->with('user')->where('tweet_id', $tweet_id)->first();
     }  
 
+    /**
+     * そのユーザーにいいねされているか
+     * 
+     * @param $user
+     * @return bool
+     */
     public function isFavoritedBy($user): bool {
         return Favorite::where('user_id', $user->user_id)->where('tweet_id', $this->tweet_id)->first() !==null;
     }
+
+    /**
+     * いいね数カウント
+     * 
+     * @return int $tweetFavoritesCount
+     */
     public function favoritesCount()
     {
         $tweetFavoritesCount = Favorite::where('tweet_id',$this->tweet_id)->count();
