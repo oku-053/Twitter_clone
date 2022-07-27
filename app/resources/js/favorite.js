@@ -19,7 +19,6 @@ $(function () {
 		//通信成功した時の処理
 		.done(function (data) {
             console.log('true');
-            console.log('data:'+data.tweetFavoritesCount)
 			$this.toggleClass('favorite'); //likedクラスのON/OFF切り替え。
 			$this.next('.favoriteCounter').html(data.tweetFavoritesCount);
            
