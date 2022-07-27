@@ -2,7 +2,7 @@
 //ページネーション定数定義
 return [
     'paginate' => [
-        'user' => 5,
+        'user' => 10,
         'tweet' => 50,
     ],
 ];
