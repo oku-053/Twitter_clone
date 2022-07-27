@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //初期表示のページ
-Route::get('/', [App\Http\Controllers\TopController::class, 'index']);
+Route::get('/', [App\Http\Controllers\TopController::class, 'index'])->name('top');
 
 Auth::routes();
 
