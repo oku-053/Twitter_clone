@@ -26,7 +26,7 @@
 <body>
     <div id="app">
         <div class="sticky-top">
-            <nav class="navbar navbar-expand-md navbar-light bg-white" style="z-index:2">
+            <nav class="navbar navbar-expand-md navbar-light bg-white" id="sidebar">
                 <div class="container">
                     <a class=" navbar-brand" href="{{ route('tweets.index') }}">
                         {{ config('app.name', 'Laravel') }}
@@ -64,7 +64,7 @@
         </div>
 
         @auth
-            <aside class="bd-sidebar" style="z-index:1">
+            <aside class="bd-sidebar">
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li>
                         <a href="{{ route('tweets.index') }}" class="nav-link link-dark">
@@ -99,10 +99,9 @@
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                         <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="logout();">
                                 {{ __('Logout') }}
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>

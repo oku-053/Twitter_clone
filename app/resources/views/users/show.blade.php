@@ -60,7 +60,7 @@
         <div class="col-md-8 mb-3">
             @foreach ($timelines as $timeline)
             <div class="card">
-                <div class="card-haeder p-3 w-100 d-flex">
+                <div class="card-haeder p-3 w-100 d-flex" style="z-index:2">
                     <img src="{{ asset('storage/profile_image/' . $user->profile_image) }}" alt onerror="this.onerror = null; this.src='https://placehold.jp/50x50.png';" width="50" height="50" class="rounded-circle">
                     <div class="ml-2 d-flex flex-column flex-grow-1">
                         <p class="mb-0">{{ $user->name }}</p>
@@ -72,6 +72,26 @@
                 </div>
                 <div class="card-body">
                     {{ $timeline->text }}
+                    <a href="{{ route('tweets.show',$timeline->tweet_id) }}" class="card__link"></a>
+                </div>
+                <div class="card-footer py-1 d-flex justify-content-end bg-white" style="z-index:3">
+                    <div>
+                        @if (!$timeline->isfavoritedBy(Auth::user()))
+                            <span class="favorites">
+                            <i class="fa-solid fa-heart favoriteToggle" data-tweet-id="{{ $timeline->tweet_id }}"></i>
+                            <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                            </span>
+                        @else
+                            <span class="favorites">
+                                <i class="fa-solid fa-heart favoriteToggle favorite"  data-tweet-id="{{ $timeline->tweet_id }}"></i>
+                            <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="mr-3 d-flex align-items-center">
+                        <a href="{{ route('tweets.show',$timeline->tweet_id) }}"><i class="far fa-comment fa-fw"></i></a>
+                        <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>  
+                    </div>                  
                 </div>
             </div>
             @endforeach

@@ -41,5 +41,9 @@ Route::group(['middleware' => 'auth'], function () {
     // ツイート関連
     Route::resource('tweets', 'App\Http\Controllers\TweetsController', ['only' => ['index', 'create', 'store', 'show', 'destroy']]);
 
-    Route::post('tweets/favorite/{id}', 'App\Http\Controllers\FavoritesController@favorite')->name('tweets.favorite');
+    //いいねする、はずす
+    Route::post('tweets/favorite/{id}', [App\Http\Controllers\FavoritesController::class,'favorite'])->name('tweets.favorite');
+
+    //コメントする
+    Route::resource('comments', 'App\Http\Controllers\CommentsController', ['only' => ['store']]);
 });

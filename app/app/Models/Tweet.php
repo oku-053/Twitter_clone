@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
@@ -42,7 +44,7 @@ class Tweet extends Model
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'tweet_id');
     }
     public function tweet()
     {
@@ -56,7 +58,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getUserTimeLine(string $user_id)
+    public function getUserTimeLine(string $user_id): Collection
     {
         return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
@@ -68,7 +70,7 @@ class Tweet extends Model
      * 
      * @return Int
      */
-    public function getTweetCount($user_id)
+    public function getTweetCount($user_id): Int
     {
         return $this->where('user_id', $user_id)->count();
     }
@@ -79,7 +81,7 @@ class Tweet extends Model
      * @param string $user_id
      * @param string $text
      */
-    public function tweetStore(string $user_id, string $text)
+    public function tweetStore(string $user_id, string $text): void
     {
         $this->user_id = $user_id;
         $this->text = $text;
@@ -113,7 +115,7 @@ class Tweet extends Model
     }
 
     // 詳細画面
-    public function getTweet(string $tweet_id)
+    public function getTweet(string $tweet_id): Model
     {
         return $this->with('user')->where('tweet_id', $tweet_id)->first();
     }  

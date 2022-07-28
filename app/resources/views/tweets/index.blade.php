@@ -22,17 +22,25 @@
                                 {!! nl2br(e($timeline->text)) !!}
                                 <a href="{{ route('tweets.show',$timeline->tweet_id) }}" class="card__link"></a>
                             </div>
-                            @if (!$timeline->isfavoritedBy(Auth::user()))
-                                <span class="favorites" style="z-index:3">
-                                <i class="fa-solid fa-heart favoriteToggle" data-tweet-id="{{ $timeline->tweet_id }}"></i>
-                                <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
-                                </span>
-                            @else
-                                <span class="favorites" style="z-index:3">
-                                    <i class="fa-solid fa-heart favoriteToggle favorite"  data-tweet-id="{{ $timeline->tweet_id }}"></i>
-                                <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
-                                </span>
-                            @endif
+                            <div class="card-footer py-1 d-flex justify-content-end bg-white" style="z-index:3">
+                                <div>
+                                    @if (!$timeline->isfavoritedBy(Auth::user()))
+                                        <span class="favorites">
+                                        <i class="fa-solid fa-heart favoriteToggle" data-tweet-id="{{ $timeline->tweet_id }}"></i>
+                                        <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                                        </span>
+                                    @else
+                                        <span class="favorites">
+                                            <i class="fa-solid fa-heart favoriteToggle favorite"  data-tweet-id="{{ $timeline->tweet_id }}"></i>
+                                        <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="mr-3 d-flex align-items-center">
+                                    <a href="{{ route('tweets.show',$timeline->tweet_id) }}"><i class="far fa-comment fa-fw"></i></a>
+                                    <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach

@@ -33,7 +33,7 @@ class Follower extends Model
      * 
      * @access public
      * @param string $user_id
-     * @return stirng followed_user_id
+     * @return array followed_user_id
      */
     public function getFollowIds(string $user_id)
     {

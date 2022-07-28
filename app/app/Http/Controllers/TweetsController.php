@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Http\Requests\TweetRequest;
 use App\Models\Follower;
 use App\Models\Tweet;
@@ -17,11 +18,10 @@ class TweetsController extends Controller
      */
     public function index(Tweet $tweet, Follower $follower)
     {
-        $loginUser = auth()->user();
-        $followIds = $follower->getFollowIds($loginUser->user_id);
-        $timelines = $tweet->getTimelines($loginUser->user_id, $followIds);
+        $loginUserId = auth()->user()->user_id;
+        $followIds = $follower->getFollowIds($loginUserId);
+        $timelines = $tweet->getTimelines($loginUserId, $followIds);
         return view('tweets.index', [
-            'loginUser' => $loginUser,
             'timelines' => $timelines,
             'followIds' => $followIds,
         ]);
@@ -61,14 +61,15 @@ class TweetsController extends Controller
      * @param Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function show(Tweet $tweet)
+    public function show(Tweet $tweet, Comment $comment)
     {
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->tweet_id);
-
+        $comments = $comment->getComments($tweet->tweet_id);
         return view('tweets.show', [
             'user'     => $user,
-            'tweet' => $tweet
+            'tweet' => $tweet,
+            'comments' => $comments
         ]);
     }
 }
