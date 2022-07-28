@@ -64,11 +64,11 @@ class TweetsController extends Controller
     public function show(Tweet $tweet, Comment $comment)
     {
         $user = auth()->user();
-        $tweet = $tweet->getTweet($tweet->tweet_id);
+        $targetTweet = $tweet->getTweet($tweet->tweet_id);
         $comments = $comment->getComments($tweet->tweet_id);
         return view('tweets.show', [
             'user'     => $user,
-            'tweet' => $tweet,
+            'tweet' => $targetTweet,
             'comments' => $comments
         ]);
     }
