@@ -17144,3 +17144,13 @@ Did you mean one of these?
 #68 /var/www/app/public/index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #69 {main}
 "} 
+[2022-07-28 20:09:35] local.ERROR: There are no commands defined in the "debugbar" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"debugbar\" namespace. at /var/www/app/vendor/symfony/console/Application.php:622)
+[stacktrace]
+#0 /var/www/app/vendor/symfony/console/Application.php(673): Symfony\\Component\\Console\\Application->findNamespace('debugbar')
+#1 /var/www/app/vendor/symfony/console/Application.php(259): Symfony\\Component\\Console\\Application->find('debugbar:clear')
+#2 /var/www/app/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /var/www/app/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /var/www/app/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 /var/www/app/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 
