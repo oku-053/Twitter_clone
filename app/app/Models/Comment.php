@@ -29,7 +29,7 @@ class Comment extends Model
         return $this->where('tweet_id', $tweetId)->with('user')->orderBy('created_at', 'DESC')->get();
     }
 
-    public function commentStore(string $userId, Array $data)
+    public function storeComment(string $userId, Array $data)
     {
         $this->user_id = $userId;
         $this->tweet_id = $data['tweet_id'];

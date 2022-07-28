@@ -17,8 +17,8 @@ class CommentsController extends Controller
     public function store(CommentRequest $request,Comment $comment)
     {
         $user = auth()->user();
-        $data = $request->all();
-        $comment->commentStore($user->user_id, $data);
+        $commentData = $request->all();
+        $comment->storeComment($user->user_id, $commentData);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }

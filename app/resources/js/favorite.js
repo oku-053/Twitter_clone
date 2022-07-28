@@ -1,7 +1,6 @@
 $(function () {
 	let favorite = $('.favoriteToggle'); //like-toggleのついたiタグを取得し代入。
     let favoriteTweetId; 
-    //console.log(favorite);
     favorite.on('click', function () { //onはイベントハンドラー
 		let $this = $(this); //this=イベントの発火した要素＝iタグを代入
 		favoriteTweetId = $this.data('tweet-id'); //iタグに仕込んだdata-tweet-idの値を取得

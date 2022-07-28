@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 
 class Favorite extends Model
@@ -33,7 +34,7 @@ class Favorite extends Model
         //ユーザーがこの投稿にいいねをしているか
         $alreadyFavorite = $this->where('user_id', $loginUserId)->where('tweet_id', $tweetId)->first();
 
-        if (!$alreadyFavorite) { 
+        if (is_null($alreadyFavorite)) { 
             $this->user_id = $loginUserId;
             $this->tweet_id = $tweetId;
             $this->save();
