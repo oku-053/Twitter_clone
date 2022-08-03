@@ -29,7 +29,7 @@ class Favorite extends Model
      * 
      * @return  response
      */
-    public function favorite(string $loginUserId, int $tweetId)
+    public function favorite(string $loginUserId, int $tweetId) 
     {   
         //ユーザーがこの投稿にいいねをしているか
         $alreadyFavorite = $this->where('user_id', $loginUserId)->where('tweet_id', $tweetId)->first();
@@ -46,7 +46,7 @@ class Favorite extends Model
         return response();
     }
 
-    public function favoritesCountJson(int $tweetId)
+    public function favoritesCountJson(int $tweetId): array
     {
         $tweetFavoritesCount = Favorite::where('tweet_id',$tweetId)->count();
         $param = [

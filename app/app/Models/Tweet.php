@@ -58,7 +58,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getUserTimeLine(string $user_id): Collection
+    public function getUserTimeLine(string $user_id): object
     {
         return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
@@ -98,7 +98,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getTimeLines(string $user_id, array $follow_ids)
+    public function getTimeLines(string $user_id, array $follow_ids): object
     {
         $follow_ids[] = $user_id;
         return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
@@ -109,7 +109,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getAllTimeLines()
+    public function getAllTimeLines(): object
     {
         return $this->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
@@ -126,7 +126,8 @@ class Tweet extends Model
      * @param $user
      * @return bool
      */
-    public function isFavoritedBy($user): bool {
+    public function isFavoritedBy($user): bool 
+    {
         return Favorite::where('user_id', $user->user_id)->where('tweet_id', $this->tweet_id)->first() !==null;
     }
 
@@ -135,7 +136,7 @@ class Tweet extends Model
      * 
      * @return int $tweetFavoritesCount
      */
-    public function favoritesCount()
+    public function favoritesCount(): int
     {
         $tweetFavoritesCount = Favorite::where('tweet_id',$this->tweet_id)->count();
         return $tweetFavoritesCount !== null ? $tweetFavoritesCount : 0 ;

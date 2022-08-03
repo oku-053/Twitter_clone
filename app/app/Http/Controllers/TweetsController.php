@@ -18,7 +18,7 @@ class TweetsController extends Controller
      */
     public function index(Tweet $tweet, Follower $follower)
     {
-        $loginUserId = auth()->id;
+        $loginUserId = auth()->id();
         $followIds = $follower->getFollowIds($loginUserId);
         $timelines = $tweet->getTimelines($loginUserId, $followIds);
         return view('tweets.index', [
@@ -48,9 +48,9 @@ class TweetsController extends Controller
      */
     public function store(TweetRequest $request, Tweet $tweet)
     {
-        $loginUser = auth()->user();
+        $loginUserId = auth()->id();
         $requestText = $request->input('text');
-        $tweet->storeTweet($loginUser->user_id, $requestText);
+        $tweet->storeTweet($loginUserId, $requestText);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }
