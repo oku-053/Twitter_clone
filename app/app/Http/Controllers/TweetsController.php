@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Http\Requests\TweetRequest;
 use App\Models\Follower;
+use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
 
 class TweetsController extends Controller
@@ -50,7 +50,7 @@ class TweetsController extends Controller
     {
         $loginUser = auth()->user();
         $requestText = $request->input('text');
-        $tweet->tweetStore($loginUser->user_id, $requestText);
+        $tweet->storeTweet($loginUser->user_id, $requestText);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }

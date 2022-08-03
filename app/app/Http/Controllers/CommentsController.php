@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
-use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
@@ -16,9 +16,9 @@ class CommentsController extends Controller
      */
     public function store(CommentRequest $request,Comment $comment)
     {
-        $user = auth()->user();
+        $user = auth()->id();
         $commentData = $request->all();
-        $comment->storeComment($user->user_id, $commentData);
+        $comment->storeComment($user, $commentData);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }
