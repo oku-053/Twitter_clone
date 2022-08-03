@@ -81,7 +81,7 @@ class Tweet extends Model
      * @param string $user_id
      * @param string $text
      */
-    public function tweetStore(string $user_id, string $text): void
+    public function storeTweet(string $user_id, string $text): void
     {
         $this->user_id = $user_id;
         $this->text = $text;
@@ -138,15 +138,7 @@ class Tweet extends Model
     public function favoritesCount()
     {
         $tweetFavoritesCount = Favorite::where('tweet_id',$this->tweet_id)->count();
-        $param = [
-        'review_likes_count' => $tweetFavoritesCount,
-        ];
-        if($tweetFavoritesCount !== null){
-            return $tweetFavoritesCount;
-        }
-        else{
-            return 0;
-        }
+        return $tweetFavoritesCount !== null ? $tweetFavoritesCount : 0 ;
     }
 
     // 主キーカラム名を指定

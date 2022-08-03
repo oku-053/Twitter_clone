@@ -24,12 +24,25 @@ class Comment extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function getComments(Int $tweetId)
+    /**
+     * コメントテーブルを取得する
+     * @param int $tweetId
+     * 
+     * @return object
+     */
+    public function getComments(int $tweetId): object
     {
         return $this->where('tweet_id', $tweetId)->with('user')->orderBy('created_at', 'DESC')->get();
     }
 
-    public function storeComment(string $userId, Array $data)
+    /**
+     * コメントを保存する
+     * @param string $userId
+     * @param array $data
+     * 
+     * @return void
+     */
+    public function storeComment(string $userId, array $data): void
     {
         $this->user_id = $userId;
         $this->tweet_id = $data['tweet_id'];
@@ -45,7 +58,8 @@ class Comment extends Model
      * @param $user
      * @return bool
      */
-    public function isFavoritedBy($user): bool {
+    public function isFavoritedBy($user): bool
+     {
         return Favorite::where('user_id', $user->user_id)->where('tweet_id', $this->tweet_id)->first() !==null;
     }
 
@@ -54,18 +68,11 @@ class Comment extends Model
      * 
      * @return int $tweetFavoritesCount
      */
-    public function favoritesCount()
+    public function favoritesCount(): int 
     {
         $tweetFavoritesCount = Favorite::where('tweet_id',$this->tweet_id)->count();
-        $param = [
-        'review_likes_count' => $tweetFavoritesCount,
-        ];
-        if($tweetFavoritesCount !== null){
-            return $tweetFavoritesCount;
-        }
-        else{
-            return 0;
-        }
+
+        return $tweetFavoritesCount !== null ? $tweetFavoritesCount : 0 ;
     }
 
         // 主キーカラム名を指定
