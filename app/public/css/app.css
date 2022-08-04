@@ -42,6 +42,18 @@
   z-index:2;
 }
 
+.fa-heart {
+  color: #C0C0C0;
+}
+
+.favorite {
+  color: 	#FFC0CB;
+}
+
+.tweet-btn{
+  position: relative;
+  left: 40px;
+}
 /* bootstrap */
 :root {
   --bs-blue: #0d6efd;
@@ -4572,6 +4584,7 @@ textarea.form-control-lg {
 .card > .card-header + .list-group,
 .card > .list-group + .card-footer {
   border-top: 0;
+  z-index: 3;
 }
 
 .card-body {
@@ -4610,6 +4623,7 @@ textarea.form-control-lg {
   padding: 0.5rem 1rem;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+  z-index:3;
 }
 .card-footer:last-child {
   border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);

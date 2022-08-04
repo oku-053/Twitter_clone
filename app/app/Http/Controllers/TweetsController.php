@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TweetRequest;
+use App\Models\Comment;
 use App\Models\Follower;
+use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
 
 class TweetsController extends Controller
@@ -17,7 +18,7 @@ class TweetsController extends Controller
      */
     public function index(Tweet $tweet, Follower $follower)
     {
-        $loginUserId = auth()->user()->user_id;
+        $loginUserId = auth()->id();
         $followIds = $follower->getFollowIds($loginUserId);
         $timelines = $tweet->getTimelines($loginUserId, $followIds);
         return view('tweets.index', [
@@ -47,9 +48,9 @@ class TweetsController extends Controller
      */
     public function store(TweetRequest $request, Tweet $tweet)
     {
+        $loginUserId = auth()->id();
         $requestText = $request->input('text');
-        $user = auth()->user();
-        $tweet->tweetStore($user->user_id, $requestText);
+        $tweet->storeTweet($loginUserId, $requestText);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }
@@ -60,14 +61,15 @@ class TweetsController extends Controller
      * @param Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function show(Tweet $tweet)
+    public function show(Tweet $tweet, Comment $comment)
     {
         $user = auth()->user();
         $targetTweet = $tweet->getTweet($tweet->tweet_id);
-
+        $comments = $comment->getComments($tweet->tweet_id);
         return view('tweets.show', [
             'user'     => $user,
-            'tweet' => $targetTweet
+            'tweet' => $targetTweet,
+            'comments' => $comments
         ]);
     }
 }

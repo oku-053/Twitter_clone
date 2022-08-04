@@ -19,7 +19,7 @@ class UsersController extends Controller
      */
     public function index(User $user)
     {
-        $all_users = $user->getAllUsers(auth()->user()->user_id);
+        $all_users = $user->getAllUsers(auth()->id());
 
         return view('users.index', [
             'all_users'  => $all_users
@@ -108,13 +108,14 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.edit', [
             'user' => $user
         ]);
     }
 
     /**
-     * ユーザー情報更新時の内容にバリデーションをかける
+     * ユーザー情報更新
      * 
      * @access public
      * @param User $user
@@ -125,6 +126,7 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $data = $request->all();
         $user->updateProfile($data);
 

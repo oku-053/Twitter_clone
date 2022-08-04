@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //初期表示のページ
-Route::get('/', [App\Http\Controllers\TopController::class, 'index']);
+Route::get('/', [App\Http\Controllers\TopController::class, 'index'])->name('top');
 
 Auth::routes();
 
@@ -40,4 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     // ツイート関連
     Route::resource('tweets', 'App\Http\Controllers\TweetsController', ['only' => ['index', 'create', 'store', 'show', 'destroy']]);
+
+    //いいねする、はずす
+    Route::post('tweets/favorite/{id}', [App\Http\Controllers\FavoritesController::class,'favorite'])->name('tweets.favorite');
+
+    //コメントする
+    Route::resource('comments', 'App\Http\Controllers\CommentsController', ['only' => ['store']]);
 });

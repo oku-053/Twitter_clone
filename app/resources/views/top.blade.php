@@ -37,6 +37,10 @@
                 <div class="card-body">
                     {{ __('Log in and tweet for the first time!') }}
                 </div>
+                    <span class="favorites" style="z-index:3">
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="favoriteCounter">{{$timeline->favoritesCount()}}</span>
+                    </span>
             </div>
         </div>
         @endif

@@ -119,9 +119,14 @@ class User extends Authenticatable
      * 
      * @return boolen 
      */
-    public function loginDecision(string $user_id)
+    public function loginDecision(string $user_id): bool
     {
         return ($user_id === Auth::user()->user_id) ? true : false;
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany('App\Favorite');
     }
 
     // 主キーカラム名を指定
