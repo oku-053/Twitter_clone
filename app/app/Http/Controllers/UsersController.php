@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\models\Follower;
-use App\models\Tweet;
-use App\models\User;
+use App\Models\Follower;
+use App\Models\Tweet;
+use App\Models\User;
 
 class UsersController extends Controller
 {
