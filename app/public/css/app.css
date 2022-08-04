@@ -3060,7 +3060,20 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #0d6efd;
   border-color: #0d6efd;
+  position: relative;
+  top: 0;
+  left: 0px;
 }
+
+.btn-primary-tweet {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  position: relative;
+  top: 0;
+  left: 40px;
+}
+
 .btn-primary:hover {
   color: #fff;
   background-color: #0b5ed7;
