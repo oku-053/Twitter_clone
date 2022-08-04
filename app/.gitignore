@@ -15,3 +15,7 @@ yarn-error.log
 /.vscode
 .gitignoretest.txt
 .env.testing
+
+/*
+!.gitignore
+!data
