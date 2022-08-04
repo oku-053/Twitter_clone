@@ -18,7 +18,7 @@ class Follower extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    public function getFollowCount($user_id)
+    public function getFollowCount($user_id): int
     {
         return $this->where('following_user_id', $user_id)->count();
     }
@@ -33,10 +33,10 @@ class Follower extends Model
      * 
      * @access public
      * @param string $user_id
-     * @return stirng followed_user_id
+     * @return array followed_user_id
      */
-    public function getFollowingIds(string $user_id)
+    public function getFollowIds(string $user_id): array
     {
-        return $this->where('following_user_id', $user_id)->get('followed_user_id');
+        return $this->where('following_user_id', $user_id)->get('followed_user_id')->pluck('followed_user_id')->toArray();
     }
 }

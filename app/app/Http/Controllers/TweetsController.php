@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Comment;
 use App\Models\Follower;
+use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
-use App\Models\User;
 
 class TweetsController extends Controller
 {
@@ -19,14 +18,12 @@ class TweetsController extends Controller
      */
     public function index(Tweet $tweet, Follower $follower)
     {
-        $loginUser = auth()->user();
-        $followIds = $follower->getFollowingIds($loginUser->user_id);
-        $followingIds = $followIds->pluck('followed_user_id')->toArray();
-        $timelines = $tweet->getTimelines($loginUser->user_id, $followingIds);
+        $loginUserId = auth()->id();
+        $followIds = $follower->getFollowIds($loginUserId);
+        $timelines = $tweet->getTimelines($loginUserId, $followIds);
         return view('tweets.index', [
-            'loginUser'      => $loginUser,
             'timelines' => $timelines,
-            'followingIds' => $followingIds,
+            'followIds' => $followIds,
         ]);
     }
 
@@ -45,18 +42,15 @@ class TweetsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\TweetRequest  $request
      * @param Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Tweet $tweet)
+    public function store(TweetRequest $request, Tweet $tweet)
     {
+        $loginUserId = auth()->id();
         $requestText = $request->input('text');
-        $request->validate([
-            'text' => ['required', 'string', 'max:140']
-        ]);
-        $user = auth()->user();
-        $tweet->tweetStore($user->user_id, $requestText);
+        $tweet->storeTweet($loginUserId, $requestText);
 
         return back()->with('flash_message', 'Tweeting is complete!');
     }
@@ -67,14 +61,15 @@ class TweetsController extends Controller
      * @param Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function show(Tweet $tweet)
+    public function show(Tweet $tweet, Comment $comment)
     {
         $user = auth()->user();
-        $tweet = $tweet->getTweet($tweet->tweet_id);
-
+        $targetTweet = $tweet->getTweet($tweet->tweet_id);
+        $comments = $comment->getComments($tweet->tweet_id);
         return view('tweets.show', [
             'user'     => $user,
-            'tweet' => $tweet
+            'tweet' => $targetTweet,
+            'comments' => $comments
         ]);
     }
 }

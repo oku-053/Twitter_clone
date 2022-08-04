@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use App\Models\Follower;
-use App\Models\Tweet;
-use App\Models\User;
+use App\Http\Requests\UserRequest;
+use App\models\Follower;
+use App\models\Tweet;
+use App\models\User;
 
 class UsersController extends Controller
 {
@@ -21,7 +19,7 @@ class UsersController extends Controller
      */
     public function index(User $user)
     {
-        $all_users = $user->getAllUsers(auth()->user()->user_id);
+        $all_users = $user->getAllUsers(auth()->id());
 
         return view('users.index', [
             'all_users'  => $all_users
@@ -42,6 +40,7 @@ class UsersController extends Controller
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
         $loginUser = auth()->user(); //ログインしている自分自身
+        $loginDecision = $user->loginDecision($user->user_id);
         $timelines = $tweet->getUserTimeLine($user->user_id);
         $isFollowing = $loginUser->isFollowing($user->user_id);
         $isFollowed = $loginUser->isFollowed($user->user_id);
@@ -53,6 +52,7 @@ class UsersController extends Controller
 
         return view('users.show', [
             'user'           => $user,
+            'loginDecision' => $loginDecision,
             'isFollowing'   => $isFollowing,
             'isFollowed'    => $isFollowed,
             'timelines'      => $timelines,
@@ -108,29 +108,26 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.edit', [
             'user' => $user
         ]);
     }
 
     /**
-     * ユーザー情報更新時の内容にバリデーションをかける
+     * ユーザー情報更新
      * 
      * @access public
      * @param User $user
-     * @param Request $request
+     * @param UserRequest $request
      *  
      * @see updateProfile
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $data = $request->all();
-        $request->validate([
-            'name'          => ['required', 'string', 'max:255'],
-            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->user_id, 'user_id')]
-        ]);
         $user->updateProfile($data);
 
         return redirect(route('users.show', $user->user_id));
