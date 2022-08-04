@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
@@ -42,7 +44,11 @@ class Tweet extends Model
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'tweet_id');
+    }
+    public function tweet()
+    {
+        return $this->hasMany(Tweet::class);
     }
 
     /**
@@ -52,7 +58,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getUserTimeLine(string $user_id)
+    public function getUserTimeLine(string $user_id): object
     {
         return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
@@ -64,7 +70,7 @@ class Tweet extends Model
      * 
      * @return Int
      */
-    public function getTweetCount($user_id)
+    public function getTweetCount($user_id): Int
     {
         return $this->where('user_id', $user_id)->count();
     }
@@ -73,9 +79,9 @@ class Tweet extends Model
      * ツイート保存
      * 
      * @param string $user_id
-     * @param string $textt
+     * @param string $text
      */
-    public function tweetStore(string $user_id, string $text)
+    public function storeTweet(string $user_id, string $text): void
     {
         $this->user_id = $user_id;
         $this->text = $text;
@@ -92,7 +98,7 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getTimeLines(string $user_id, array $follow_ids)
+    public function getTimeLines(string $user_id, array $follow_ids): object
     {
         $follow_ids[] = $user_id;
         return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
@@ -103,15 +109,37 @@ class Tweet extends Model
      * 
      * @return \Illuminate\Http\Response
      */
-    public function getAllTimeLines()
+    public function getAllTimeLines(): object
     {
         return $this->orderBy('created_at', 'DESC')->paginate(config('const.paginate.tweet'));
     }
 
     // 詳細画面
-    public function getTweet(string $tweet_id)
+    public function getTweet(string $tweet_id): Model
     {
         return $this->with('user')->where('tweet_id', $tweet_id)->first();
+    }  
+
+    /**
+     * そのユーザーにいいねされているか
+     * 
+     * @param $user
+     * @return bool
+     */
+    public function isFavoritedBy($user): bool 
+    {
+        return Favorite::where('user_id', $user->user_id)->where('tweet_id', $this->tweet_id)->first() !==null;
+    }
+
+    /**
+     * いいね数カウント
+     * 
+     * @return int $tweetFavoritesCount
+     */
+    public function favoritesCount(): int
+    {
+        $tweetFavoritesCount = Favorite::where('tweet_id',$this->tweet_id)->count();
+        return $tweetFavoritesCount !== null ? $tweetFavoritesCount : 0 ;
     }
 
     // 主キーカラム名を指定

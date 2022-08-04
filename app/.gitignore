@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/storage
 .env
 .env.backup
 .phpunit.result.cache
@@ -13,5 +14,8 @@ yarn-error.log
 /.idea
 /.vscode
 .gitignoretest.txt
-.env
 .env.testing
+
+
+!.gitignore
+!data
